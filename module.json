@@ -1,0 +1,86 @@
+{
+  "id": "cosmere-automated-actions",
+  "title": "Cosmere Automated Actions",
+  "description": "A Module to add automations for some of cosmere's more manual actions",
+  "version": "#{VERSION}#",
+  "library": "false",
+  "manifestPlusVersion": "1.2.0",
+  "authors": [
+    {
+    "name": "Cyprian",
+    "url": "https://github.com/CyprianStream"
+    }
+  ],
+  "url": "https://github.com/CyprianStream/cosmere-automated-actions/",
+  "manifest": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/v0.1.2/module.json",
+  "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/0.1.2/module.zip",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "relationships": {
+    "requires": [
+    {
+      "id": "socketlib",
+      "type": "module",
+      "manifest": "https://github.com/farling42/foundryvtt-socketlib/releases/latest/download/module.json"
+    }
+    ],
+    "systems": [
+      {
+        "id": "cosmere-rpg",
+        "type": "system",
+        "compatibility": {
+          "minimum": "1",
+          "verified": "1"
+        }
+      }
+    ]
+  },
+  "packs": [
+    {
+      "name": "CAAActions",
+      "label": "CAA Actions",
+      "path": "packs/caa-actions",
+      "type": "Item",
+      "module": "cosmere-automated-actions"
+    },
+    {
+      "name": "CAAItems",
+      "label": "CAA Items",
+      "path": "packs/caa-items",
+      "type": "Item",
+      "module": "cosmere-automated-actions"
+    },
+    {
+      "name": "CAASummons",
+      "label": "CAA Summons",
+      "path": "packs/caa-summons",
+      "type": "Actor",
+      "module": "cosmere-automated-actions"
+    },
+    {
+      "name": "CAAMiscellaneous",
+      "label": "CAA Miscellaneous",
+      "path": "packs/caa-miscellaneous",
+      "type": "Item",
+      "module": "cosmere-automated-actions"
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Cosmere Automated Actions",
+      "sorting": "a",
+      "color": "#348f2d",
+      "packs": [
+        "CAAActions",
+        "CAAItems",
+        "CAASummons",
+        "CAAMiscellaneous"
+      ]
+    }
+  ]
+}
