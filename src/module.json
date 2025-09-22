@@ -2,7 +2,7 @@
 	"id": "cosmere-automated-actions",
 	"title": "Cosmere Automated Actions",
 	"description": "A Module to add automations for some of cosmere's more manual actions",
-	"version": "#{VERSION}#",
+	"version": "1.0.0",
 	"library": "false",
 	"manifestPlusVersion": "1.2.0",
 	"authors": [
@@ -19,7 +19,7 @@
 		"verified": "12"
 	},
 	"esmodules": [
-		"index.js"
+		"main.js"
 	],
 	"relationships": {
 		"requires": [
