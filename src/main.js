@@ -19,10 +19,9 @@ Hooks.once('init', () => {
 	//return preloadHandlebarsTemplates();
 });
 
-Hooks.on('cosmere-rpg.useItem', (item, rollConfig, _options) => {
-	const itemId = item.system.id
-	console.log(item)
-	console.log(itemId)
+Hooks.on('cosmere-rpg.useItem', (item, _rollConfig, _options) => {
+	const actor = item.actor;
+	const itemId = item.system.id;
 	switch (item.system.type) {
 		// types: talent tree, heroic, basic, radiant, power, goal
 		//any case that could be either handbook or starter rules
