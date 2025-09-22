@@ -1,7 +1,7 @@
 
 //TODO: add sphere dunning, currently unsure of how could make this work without potentially deleting currency
 //let spheresDunned = 0
-export async function breatheStormlight(){
+export async function breatheStormlight(item, actor){
   const spheresInfusedTotal = actor.system.currency.spheres.total.derived
   const actorInv = actor.system.resources.inv.value
   const actorInvMax = actor.system.resources.inv.max.derived

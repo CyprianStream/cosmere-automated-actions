@@ -43,9 +43,9 @@ import { progression } from "./surges/progression/progression.js"
 
 export const handbookMacros = {
     //common stormlight actions
-    breathe_stormlight: breatheStormlight(),
-    enhance: enhance(),
-    stormlight_reclamation: stormlightReclamation(),
+    "breathe-stormlight": breatheStormlight,
+    enhance: enhance,
+    "stormlight-reclamation": stormlightReclamation,
 
     //Abrasion actions
 
@@ -66,10 +66,10 @@ export const handbookMacros = {
 
 
     //Progression actions
-    explosive_growth: explosiveGrowth(),
-    from_the_brink: fromTheBrink(),
-    injury_regrowth: injuryRegrowth(),
-    progression: progression()
+    "explosive-growth": explosiveGrowth,
+    "from-the-brink": fromTheBrink,
+    "injury-regrowth": injuryRegrowth,
+    progression: progression,
 
     //Tension actions
 
@@ -78,4 +78,4 @@ export const handbookMacros = {
 
 
     //Transportation actions
-} 
+}
