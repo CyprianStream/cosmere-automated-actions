@@ -9,8 +9,8 @@ await ChatMessage.create({content: msg, speaker});
 await actor.perception.roll();*/
 
 
-export async function injuryRegrowth(){
+export async function injuryRegrowth(item, actor){
     const target = game.user.targets.first();
     const options = Array.from(target.actor.system.injuries)
-    
+
 }

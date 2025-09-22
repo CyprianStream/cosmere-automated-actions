@@ -1,5 +1,5 @@
 import { activateAllItemEffects } from "../../../utils/constants.js";
 
-export function enhance(){
-    activateAllItemEffects("Enhance")
+export function enhance(item, actor) {
+	activateAllItemEffects(item);
 }
