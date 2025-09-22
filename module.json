@@ -1,58 +1,58 @@
 {
-  "id": "cosmere-automated-actions",
-  "title": "Cosmere Automated Actions",
-  "description": "A Module to add automations for some of cosmere's more manual actions",
-  "version": "#{VERSION}#",
-  "library": "false",
-  "manifestPlusVersion": "1.2.0",
-  "authors": [
-    {
-    "name": "Cyprian",
-    "url": "https://github.com/CyprianStream"
-    }
-  ],
-  "url": "https://github.com/CyprianStream/cosmere-automated-actions/",
-  "manifest": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/v0.1.2/module.json",
-  "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/0.1.2/module.zip",
-  "compatibility": {
-    "minimum": "12",
-    "verified": "12"
-  },
-  "esmodules": [
-    "scripts/main.js"
-  ],
-  "relationships": {
-    "requires": [
-      {
+	"id": "cosmere-automated-actions",
+	"title": "Cosmere Automated Actions",
+	"description": "A Module to add automations for some of cosmere's more manual actions",
+	"version": "#{VERSION}#",
+	"library": "false",
+	"manifestPlusVersion": "1.2.0",
+	"authors": [
+		{
+			"name": "Cyprian",
+			"url": "https://github.com/CyprianStream"
+		}
+	],
+	"url": "https://github.com/CyprianStream/cosmere-automated-actions/",
+	"manifest": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/v0.1.2/module.json",
+	"download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/0.1.2/module.zip",
+	"compatibility": {
+		"minimum": "12",
+		"verified": "12"
+	},
+	"esmodules": [
+		"index.js"
+	],
+	"relationships": {
+		"requires": [
+			{
 				"id": "sequencer",
 				"type": "module",
 				"compatibility": {}
 			},
-      {
-        "id": "socketlib",
-        "type": "module",
-        "manifest": "https://github.com/farling42/foundryvtt-socketlib/releases/latest/download/module.json"
-      },
-      {
+			{
+				"id": "socketlib",
+				"type": "module",
+				"manifest": "https://github.com/farling42/foundryvtt-socketlib/releases/latest/download/module.json"
+			},
+			{
 				"id": "cosmere-rpg-stormlight-handbook",
 				"type": "module",
 				"compatibility": {}
 			},
-      {
+			{
 				"id": "cosmere-rpg-stormlight-worldguide",
 				"type": "module",
 				"compatibility": {}
 			}
-    ],
-    "systems": [
-      {
-        "id": "cosmere-rpg",
-        "type": "system",
-        "compatibility": {
-          "minimum": "1",
-          "verified": "1"
-        }
-      }
-    ]
-  }
+		],
+		"systems": [
+			{
+				"id": "cosmere-rpg",
+				"type": "system",
+				"compatibility": {
+					"minimum": "1",
+					"verified": "1"
+				}
+			}
+		]
+	}
 }
