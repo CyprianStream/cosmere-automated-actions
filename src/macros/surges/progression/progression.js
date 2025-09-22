@@ -1,4 +1,4 @@
-import { surgeScalingSize, surgeScalingDie } from "../../../scripts/utils/constants";
+import { surgeScalingSize, surgeScalingDie } from "../../../utils/constants";
 
 export function progression(){
     const target = game.user.targets.first();

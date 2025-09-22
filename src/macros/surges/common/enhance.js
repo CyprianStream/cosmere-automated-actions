@@ -1,4 +1,4 @@
-import { activateAllItemEffects } from "../../../scripts/utils/constants.js";
+import { activateAllItemEffects } from "../../../utils/constants.js";
 
 export function enhance(){
     activateAllItemEffects("Enhance")
