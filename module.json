@@ -23,11 +23,26 @@
   ],
   "relationships": {
     "requires": [
-    {
-      "id": "socketlib",
-      "type": "module",
-      "manifest": "https://github.com/farling42/foundryvtt-socketlib/releases/latest/download/module.json"
-    }
+      {
+				"id": "sequencer",
+				"type": "module",
+				"compatibility": {}
+			},
+      {
+        "id": "socketlib",
+        "type": "module",
+        "manifest": "https://github.com/farling42/foundryvtt-socketlib/releases/latest/download/module.json"
+      },
+      {
+				"id": "cosmere-rpg-stormlight-handbook",
+				"type": "module",
+				"compatibility": {}
+			},
+      {
+				"id": "cosmere-rpg-stormlight-worldguide",
+				"type": "module",
+				"compatibility": {}
+			}
     ],
     "systems": [
       {
@@ -39,48 +54,5 @@
         }
       }
     ]
-  },
-  "packs": [
-    {
-      "name": "CAAActions",
-      "label": "CAA Actions",
-      "path": "packs/caa-actions",
-      "type": "Item",
-      "module": "cosmere-automated-actions"
-    },
-    {
-      "name": "CAAItems",
-      "label": "CAA Items",
-      "path": "packs/caa-items",
-      "type": "Item",
-      "module": "cosmere-automated-actions"
-    },
-    {
-      "name": "CAASummons",
-      "label": "CAA Summons",
-      "path": "packs/caa-summons",
-      "type": "Actor",
-      "module": "cosmere-automated-actions"
-    },
-    {
-      "name": "CAAMiscellaneous",
-      "label": "CAA Miscellaneous",
-      "path": "packs/caa-miscellaneous",
-      "type": "Item",
-      "module": "cosmere-automated-actions"
-    }
-  ],
-  "packFolders": [
-    {
-      "name": "Cosmere Automated Actions",
-      "sorting": "a",
-      "color": "#348f2d",
-      "packs": [
-        "CAAActions",
-        "CAAItems",
-        "CAASummons",
-        "CAAMiscellaneous"
-      ]
-    }
-  ]
+  }
 }
