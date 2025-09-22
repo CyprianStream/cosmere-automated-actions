@@ -1,4 +1,3 @@
-
 import { handbookMacros } from "./macros/handbook-macros.js";
 import { worldguideMacros } from "./macros/worldguide-macros.js";
 import { starterRulesMacros } from "./macros/starter-rules-macros.js"
@@ -31,18 +30,17 @@ Hooks.on('cosmere-rpg.useItem', (item, _rollConfig, _options) => {
 		case "surge":
 		case "power":
 			if (IsModuleActive(OFFICIAL_MODULES.handbook)) {
-				console.log(cosmereAutomatedActions.handbookMacros.itemId)
-				cosmereAutomatedActions.handbookMacros.itemId
+				cosmereAutomatedActions.handbookMacros[itemId](item, actor);
 			} else {
-				cosmereAutomatedActions.starterRulesMacros.itemId
+				cosmereAutomatedActions.starterRulesMacros[itemId](item, actor);
 			}
 			break;
 		//any case that could be world guide or starter rules
 		case "adversary feature":
 			if (IsModuleActive(OFFICIAL_MODULES.worldguide)) {
-				cosmereAutomatedActions.worldguideMacros.itemId
+				cosmereAutomatedActions.worldguideMacros[itemId](item, actor);
 			} else {
-				cosmereAutomatedActions.starterRulesMacros.itemId
+				cosmereAutomatedActions.starterRulesMacros[itemId](item, actor);
 			}
 			break;
 
