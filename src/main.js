@@ -1,8 +1,8 @@
 
-import { handbookMacros } from "../macros/handbook-macros.js";
-import { worldguideMacros } from "../macros/worldguide-macros.js";
-import { starterRulesMacros } from "../macros/starter-rules-macros.js"
-import { registerModuleSettings } from "./utils/settings";
+import { handbookMacros } from "./macros/handbook-macros.js";
+import { worldguideMacros } from "./macros/worldguide-macros.js";
+import { starterRulesMacros } from "./macros/starter-rules-macros.js"
+import { registerModuleSettings } from "./scripts/utils/settings.js";
 
 var handbookActive;
 var worldguideActive;

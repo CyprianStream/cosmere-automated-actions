@@ -14,6 +14,11 @@ export const MODULE_NAME = 'Cosmere Automated Actions';
  */
 export const SYSTEM_ID = 'cosmere-rpg';
 
+export const OFFICIAL_MODULES = {
+	worldguide: 'cosmere-rpg-stormlight-worldguide',
+	handbook: 'cosmere-rpg-stormlight-handbook',
+};
+
 //todo: remove following constants from macros
 
 //Actor Currency
@@ -97,7 +102,7 @@ export function getFirstTarget(){
     Array.from(game.user.targets)[0].actor.uuid
 }
 export function getAllTargets(){
-    
+
 }
 export async function activateAllItemEffects(itemName){
     const item = actor.items.getName(itemName);
@@ -170,4 +175,3 @@ export async function surgeScalingSize(rank){
 //User Misc
 export const target = game.user.targets.first();
 export const targets = game.user.targets
-
