@@ -8,6 +8,7 @@ Current automated items include:
 - Breathe Stormlight
 - Enhance
 - From The Brink(in testing)
+- Stormlight Reclamation(only adds 1 for now)
 
 ## Requirements
 To use this module you MUST have the following modules installed
@@ -23,7 +24,8 @@ It is also recommended to have the following paid modules to get the most value 
 ## Planned Features
 I will be slowly adding automations to features as I have need for them, or feel free to request them in the issue tracker!
 Current items planned for automation include:
-- Stormlight Reclamation
+- Aid
+- Stormlight Reclamation(Add popup that lets you pick how much to add)
 - Explosive Growth
 - Injury Regrowth
 - Progression

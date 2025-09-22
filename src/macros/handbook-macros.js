@@ -66,10 +66,11 @@ export const handbookMacros = {
 
 
     //Progression actions
-    "explosive-growth": explosiveGrowth,
+    
+    //"explosive-growth": explosiveGrowth,
     "from-the-brink": fromTheBrink,
-    "injury-regrowth": injuryRegrowth,
-    progression: progression,
+    //"injury-regrowth": injuryRegrowth,
+    //progression: progression,
 
     //Tension actions
 
