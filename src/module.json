@@ -26,13 +26,15 @@
 			{
 				"id": "sequencer",
 				"type": "module",
-				"compatibility": {}
+				"manifest": "https://github.com/fantasycalendar/FoundryVTT-Sequencer/releases/latest/download/module.json"
 			},
 			{
 				"id": "socketlib",
 				"type": "module",
 				"manifest": "https://github.com/farling42/foundryvtt-socketlib/releases/latest/download/module.json"
-			},
+			}
+		],
+		"recommends": [
 			{
 				"id": "cosmere-rpg-stormlight-handbook",
 				"type": "module",

@@ -22,7 +22,6 @@ Hooks.on('cosmere-rpg.useItem', (item, _rollConfig, _options) => {
 	const actor = item.actor;
 	const itemId = item.system.id;
 	switch (item.system.type) {
-		// types: talent tree, heroic, basic, radiant, power, goal
 		//any case that could be either handbook or starter rules
 		case "basic":
 		case "path":
@@ -43,7 +42,6 @@ Hooks.on('cosmere-rpg.useItem', (item, _rollConfig, _options) => {
 				cosmereAutomatedActions.starterRulesMacros[itemId](item, actor);
 			}
 			break;
-
-		default: return
+		default: return;
 	}
 })
