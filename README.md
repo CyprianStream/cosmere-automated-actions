@@ -14,7 +14,6 @@ Current automated items include:
 To use this module you MUST have the following modules installed
 
 - [libWrapper](https://foundryvtt.com/packages/lib-wrapper)
-- [sequencer](https://foundryvtt.com/packages/sequencer)
 
 It is also recommended to have the following paid modules to get the most value out of this module, but it will work with just the base starter rules as well.
 
