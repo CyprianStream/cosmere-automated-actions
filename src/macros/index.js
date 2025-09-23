@@ -1,4 +1,4 @@
-//common stormlight actions
+//Common stormlight actions
 import { breatheStormlight } from "./surges/common/breathe-stormlight.js"
 import { enhance } from "./surges/common/enhance.js"
 import { stormlightReclamation } from "./surges/common/stormlight-reclamation.js"
@@ -38,45 +38,68 @@ import { progression } from "./surges/progression/progression.js"
 //Transportation actions
 
 
+//Adversary actions
 
 
-
-export const handbookMacros = {
-    //common stormlight actions
-    "breathe-stormlight": breatheStormlight,
-    enhance: enhance,
-    "stormlight-reclamation": stormlightReclamation,
-
-    //Abrasion actions
+//Adversary features
 
 
-    //Adhesion actions
+//Adversary stormlight actions and features
 
 
-    //Cohesion actions
+//Adversary strikes
 
 
-    //Division actions
+//Basic Macros
 
 
-    //Graviatation actions
+export const macros = {
+	//Common stormlight actions
+	"breathe-stormlight": breatheStormlight,
+	"enhance": enhance,
+	"stormlight-reclamation": stormlightReclamation,
+
+	//Abrasion actions
 
 
-    //Illumination actions
+	//Adhesion actions
 
 
-    //Progression actions
-    
-    //"explosive-growth": explosiveGrowth,
-    "from-the-brink": fromTheBrink,
-    //"injury-regrowth": injuryRegrowth,
-    //progression: progression,
-
-    //Tension actions
+	//Cohesion actions
 
 
-    //Transformation actions
+	//Division actions
 
 
-    //Transportation actions
+	//Graviatation actions
+
+
+	//Illumination actions
+
+
+	//Progression actions
+	"from-the-brink": fromTheBrink,
+
+	//Tension actions
+
+
+	//Transformation actions
+
+
+	//Transportation actions
+
+
+	//Adversary actions
+
+
+	//Adversary features
+
+
+	//Adversary stormlight actions and features
+
+
+	//Adversary strikes
+
+
+	//Basic Macros
 }
