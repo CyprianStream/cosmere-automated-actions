@@ -50,6 +50,9 @@ import { progression } from "./surges/progression/progression.js"
 //Adversary strikes
 
 
+//Adversary unique
+import { disquiet } from "./adversary-features/actions/disquiet.js"
+
 //Basic Macros
 
 
@@ -100,6 +103,9 @@ export const macros = {
 
 	//Adversary strikes
 
+
+	//Adversary unique
+	disquiet: disquiet,
 
 	//Basic Macros
 }
