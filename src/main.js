@@ -15,18 +15,8 @@ Hooks.once('init', () => {
 });
 
 Hooks.on('cosmere-rpg.useItem', (item, _rollConfig, _options) => {
-	const actor = item.actor;
-	const itemId = item.system.id;
-	switch (item.system.type) {
-		//any case that could be either handbook or starter rules
-		case "basic":
-		case "path":
-		case "stormlight":
-		case "surge":
-		case "power":
-		case "adversary feature": {
-			cosmereAutomatedActions.macros[itemId](item, actor);
-		}
-		default: return;
-	}
+    const actor = item.actor;
+    const itemId = item.system.id;
+    const macro = cosmereAutomatedActions.macros[itemId];
+    if(macro) macro(item,actor);
 })
