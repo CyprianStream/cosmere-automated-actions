@@ -3,6 +3,10 @@ export function IsModuleActive(moduleId) {
 	return game.modules.get(moduleId)?.active;
 }
 
+export function nameToId(str) {
+    return str.toLowerCase().split(' ').join('-');
+}
+
 //Actor Functions
 export function getFirstTarget(){
     Array.from(game.user.targets)[0].actor.uuid

@@ -50,6 +50,9 @@ import { progression } from "./surges/progression/progression.js"
 //Adversary strikes
 
 
+//Adversary unique
+
+
 //Basic Macros
 
 
@@ -99,6 +102,9 @@ export const macros = {
 
 
 	//Adversary strikes
+
+
+	//Adversary unique
 
 
 	//Basic Macros
