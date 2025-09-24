@@ -51,11 +51,8 @@ import { progression } from "./surges/progression/progression.js"
 
 
 //Adversary unique
-<<<<<<< HEAD
 import { disquiet } from "./adversary-features/actions/disquiet.js"
-=======
 
->>>>>>> bb4d9a7dc1069c343605dbf66a3b45fd587a3a09
 
 //Basic Macros
 
@@ -109,11 +106,7 @@ export const macros = {
 
 
 	//Adversary unique
-<<<<<<< HEAD
 	disquiet: disquiet,
-=======
-
->>>>>>> bb4d9a7dc1069c343605dbf66a3b45fd587a3a09
 
 	//Basic Macros
 }
