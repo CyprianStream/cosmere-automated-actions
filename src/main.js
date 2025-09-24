@@ -1,7 +1,6 @@
 import { macros } from "./macros/index.js";
 import { registerModuleSettings } from "./utils/settings.js";
-import { OFFICIAL_MODULES } from "./utils/constants.js";
-import { IsModuleActive } from "./utils/helpers.js";
+import { nameToId } from "./utils/helpers.js";
 
 Hooks.once('init', () => {
 	globalThis.cosmereAutomatedActions = {
@@ -16,7 +15,8 @@ Hooks.once('init', () => {
 
 Hooks.on('cosmere-rpg.useItem', (item, _rollConfig, _options) => {
     const actor = item.actor;
-    const itemId = item.system.id;
+    var itemId = item.system.id;
+	if(itemId = "new-action"){itemId = nameToId(item.name)}
     const macro = cosmereAutomatedActions.macros[itemId];
     if(macro) macro(item,actor);
 })
