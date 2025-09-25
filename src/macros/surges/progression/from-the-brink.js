@@ -7,5 +7,5 @@ export async function fromTheBrink(item, actor){
     }
     target.actor.toggleStatusEffect("unconscious", {active: true});
     target.actor.toggleStatusEffect("dead", {active: false});
-    target.actor.system.resources.hea.value = 0;
+    target.actor.update({"system.resources.hea.value": 0})
 }
