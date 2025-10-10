@@ -23,10 +23,12 @@ import { stormlightReclamation } from "./surges/common/stormlight-reclamation.js
 
 
 //Progression actions
+import { progression, cancelCharacterRegrowth } from "./surges/progression/progression.js"
 import { explosiveGrowth } from "./surges/progression/explosive-growth.js"
-import { fromTheBrink } from "./surges/progression/from-the-brink.js"
 import { injuryRegrowth } from "./surges/progression/injury-regrowth.js"
-import { progression } from "./surges/progression/progression.js"
+import { fromTheBrink } from "./surges/progression/from-the-brink.js"
+
+
 
 
 //Tension actions
@@ -82,6 +84,9 @@ export const macros = {
 
 
 	//Progression actions
+	progression: progression,
+	"cancel-character-regrowth": cancelCharacterRegrowth,
+	"cancel-regrowth-infusion": cancelCharacterRegrowth,
 	"from-the-brink": fromTheBrink,
 
 	//Tension actions
