@@ -85,6 +85,7 @@ export const macros = {
 
 	//Progression actions
 	progression: progression,
+	"injury-regrowth": injuryRegrowth,
 	"cancel-character-regrowth": cancelCharacterRegrowth,
 	"cancel-regrowth-infusion": cancelCharacterRegrowth,
 	"from-the-brink": fromTheBrink,
