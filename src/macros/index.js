@@ -20,6 +20,9 @@ import { stormlightReclamation } from "./surges/common/stormlight-reclamation.js
 
 
 //Illumination actions
+import { illumination } from "./surges/illumination/illumination.js"
+import { dismissComplexIllusion } from "./surges/illumination/illumination.js"
+import { dismissDisguise } from "./surges/illumination/illumination.js"
 
 
 //Progression actions
@@ -81,7 +84,9 @@ export const macros = {
 
 
 	//Illumination actions
-
+	illumination: illumination,
+	"dismiss-complex-illusion": dismissComplexIllusion,
+	"dismiss-disguise": dismissDisguise,
 
 	//Progression actions
 	progression: progression,
