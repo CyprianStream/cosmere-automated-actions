@@ -70,13 +70,13 @@ export async function progression(item, actor){
                 }
                 const characterRegrowth = 1;
                 //Adds "Cancel Regrowth Infusion" item to target
-                const cancelRegrowthInfusion = fromUuid("Compendium.world.caa-items.Item.0gVCbh8s8mKo5X0c");
+                const cancelRegrowthInfusion = fromUuid("Compendium.cosmere-automated-actions.CAAActions.Item.5SzzMlt3QUMTwXoF");
                 const cancelRegrowthInfusionItem = await game.items.fromCompendium(cancelRegrowthInfusion);
                 cancelRegrowthInfusionItem.setFlag("world", "target", target.actor.uuid);
                 cancelRegrowthInfusionItem.setFlag("world", "caster", caster.uuid);
                 actor.createEmbeddedDocuments("Item", [cancelRegrowthInfusionItem]);
                 //Adds "Cancel Regrowth" item to caster
-                const cancelCharacterRegrowth = fromUuid("Compendium.world.caa-items.Item.4vJ2HCi2G6Wh1KF6");
+                const cancelCharacterRegrowth = fromUuid("Compendium.cosmere-automated-actions.CAAActions.Item.LNAzM5dFOJ4fqqdL");
                 const cancelCharacterRegrowthItem = await game.items.fromCompendium(cancelCharacterRegrowth);
                 cancelCharacterRegrowthItem.setFlag("world", "target", target.actor.uuid);
                 cancelCharacterRegrowthItem.setFlag("world", "caster", caster.uuid);

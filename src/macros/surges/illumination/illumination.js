@@ -15,7 +15,7 @@ export async function illumination(item, actor){
                 action: "complex-illusion",
                 callback: async () => {
                     //adds "Dismiss Complex Illusion" item to actor
-                    const dismissComplexIllusion = fromUuid("Compendium.world.caa-items.Item.89FozEmV2EO0mwLn");
+                    const dismissComplexIllusion = fromUuid("Compendium.cosmere-automated-actions.CAAActions.Item.EZqaHREQyTkBiRIb");
                     const dismissComplexIllusionItem = await game.items.fromCompendium(dismissComplexIllusion);
                     actor.createEmbeddedDocuments("Item", [dismissComplexIllusionItem]);
                 }
@@ -25,7 +25,7 @@ export async function illumination(item, actor){
                 action: "disguise-yourself",
                 callback: async () => {
                     //adds "Dismiss Disguise" item to actor
-                    const dismissDisguise = fromUuid("Compendium.world.caa-items.Item.G7s1hu71XYPZqtMZ");
+                    const dismissDisguise = fromUuid("Compendium.cosmere-automated-actions.CAAActions.Item.3SdIMgwufXgAfQmM");
                     const dismissDisguiseItem = await game.items.fromCompendium(dismissDisguise);
                     actor.createEmbeddedDocuments("Item", [dismissDisguiseItem]);
                 }
