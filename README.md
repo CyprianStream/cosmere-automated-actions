@@ -7,8 +7,12 @@ This module will add in automations to some basic actions and items
 Current automated items include:
 - Breathe Stormlight
 - Enhance
-- From The Brink(in testing)
-- Stormlight Reclamation(only adds 1 for now)
+- From The Brink
+- Stormlight Reclamation
+- Illumination
+- Progression
+- Injury Regrowth
+- Disquiet
 
 ## Requirements
 To use this module you MUST have the following modules installed
@@ -23,11 +27,13 @@ It is also recommended to have the following paid modules to get the most value 
 ## Planned Features
 I will be slowly adding automations to features as I have need for them, or feel free to request them in the issue tracker!
 Current items planned for automation include:
-- Aid
-- Stormlight Reclamation(Add popup that lets you pick how much to add)
+
 - Explosive Growth
-- Injury Regrowth
-- Progression
+- Gravitation
+- Gravitational Slam
+- Mighty
+
+Items on this list may not be added in any particular order, if you would like an item added let me know, or add it yourself by submitting a PR with the macro!
 
 
 ## Need help?
