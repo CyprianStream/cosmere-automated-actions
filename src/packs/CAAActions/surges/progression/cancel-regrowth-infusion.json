@@ -93,6 +93,10 @@
     ],
     "folder": "atcn34pXpBcZhT2o",
     "flags": {
+        "world": {
+            "target": "Actor.VhpiiGLa5V2SoWSJ",
+            "caster": "Actor.JG7xj1Pf07LpAA5E"
+        }
     },
     "ownership": {
         "default": 0
