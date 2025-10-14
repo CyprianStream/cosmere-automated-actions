@@ -1,4 +1,3 @@
-
 export async function stormlightReclamation(item, actor) {
 	//create popup to ask "how much stormlight do you reclaim"
 	await foundry.applications.api.DialogV2.prompt({ //In foundry version 13 potentially replace with .input for cleaner macro?

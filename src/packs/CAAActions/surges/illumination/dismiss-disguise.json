@@ -1,0 +1,81 @@
+{
+    "name": "Dismiss Disguise",
+    "type": "action",
+    "img": "icons/magic/unholy/silhouette-robe-evil-power.webp",
+    "system": {
+        "id": "<id>",
+        "type": "basic",
+        "description": {
+            "value": "<p>Edit this to describe what this action is and does.</p>",
+            "chat": "",
+            "short": ""
+        },
+        "activation": {
+            "type": "none",
+            "cost": {
+                "value": null
+            },
+            "consume": [],
+            "flavor": "",
+            "attribute": "default",
+            "plotDie": false,
+            "opportunity": null,
+            "complication": null,
+            "uses": null
+        },
+        "damage": {},
+        "modality": null,
+        "events": {},
+        "relationships": {},
+        "ancestry": null
+    },
+    "effects": [
+        {
+            "name": "Disguised",
+            "img": "icons/magic/unholy/silhouette-robe-evil-power.webp",
+            "disabled": false,
+            "duration": {
+                "rounds": 1,
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "_id": "nblczTlWrh4Z7uXU",
+            "type": "base",
+            "system": {
+                "isStackable": false,
+                "stacks": null
+            },
+            "changes": [],
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.343",
+                "systemId": "cosmere-rpg",
+                "systemVersion": "1.0.2",
+                "createdTime": null,
+                "modifiedTime": null,
+                "lastModifiedBy": null
+            },
+            "_key": "!items.effects!3SdIMgwufXgAfQmM.nblczTlWrh4Z7uXU"
+        }
+    ],
+    "folder": "t6TK4I1u7tBI6pPs",
+    "ownership": {
+        "default": 0
+    },
+    "flags": {},
+    "_id": "3SdIMgwufXgAfQmM",
+    "sort": 0,
+    "_key": "!items!3SdIMgwufXgAfQmM"
+}

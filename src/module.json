@@ -1,55 +1,81 @@
 {
-	"id": "cosmere-automated-actions",
-	"title": "Cosmere Automated Actions",
-	"description": "A Module to add automations for some of cosmere's more manual actions",
-	"version": "1.0.0",
-	"library": "false",
-	"manifestPlusVersion": "1.2.0",
-	"authors": [
-		{
-			"name": "Cyprian",
-			"url": "https://github.com/CyprianStream"
-		}
-	],
-	"url": "https://github.com/CyprianStream/cosmere-automated-actions/",
-	"manifest": "https://raw.githubusercontent.com/CyprianStream/cosmere-automated-actions/refs/heads/master/src/module.json",
-	"download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/v1.0.0/module.zip",
-	"compatibility": {
-		"minimum": "12",
-		"verified": "12"
-	},
-	"esmodules": [
-		"main.js"
-	],
-	"relationships": {
-		"requires": [
-			{
-				"id": "socketlib",
-				"type": "module",
-				"manifest": "https://github.com/farling42/foundryvtt-socketlib/releases/latest/download/module.json"
-			}
-		],
-		"recommends": [
-			{
-				"id": "cosmere-rpg-stormlight-handbook",
-				"type": "module",
-				"compatibility": {}
-			},
-			{
-				"id": "cosmere-rpg-stormlight-worldguide",
-				"type": "module",
-				"compatibility": {}
-			}
-		],
-		"systems": [
-			{
-				"id": "cosmere-rpg",
-				"type": "system",
-				"compatibility": {
-					"minimum": "1",
-					"verified": "1"
-				}
-			}
-		]
-	}
+    "id": "cosmere-automated-actions",
+    "title": "Cosmere Automated Actions",
+    "description": "A Module to add automations for some of cosmere's more manual actions",
+    "version": "1.1.0",
+    "library": "false",
+    "manifestPlusVersion": "1.2.0",
+    "authors": [
+        {
+            "name": "Cyprian",
+            "url": "https://github.com/CyprianStream"
+        }
+    ],
+    "url": "https://github.com/CyprianStream/cosmere-automated-actions/",
+    "manifest": "https://raw.githubusercontent.com/CyprianStream/cosmere-automated-actions/refs/heads/master/src/module.json",
+    "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/v1.1.0/module.zip",
+    "compatibility": {
+        "minimum": "12",
+        "verified": "12"
+    },
+    "esmodules": [
+        "main.js"
+    ],
+    "packs": [
+        {
+            "name": "CAAActions",
+            "label": "CAA Actions",
+            "path": "packs/caaactions",
+            "type": "Item",
+            "module": "cosmere-automated-actions"
+        }
+    ],
+    "packFolders": [
+        {
+            "name": "Cosmere Automated Actions",
+            "sorting": "a",
+            "color": "#000000",
+            "folders": [
+                {
+                    "name": "CAAActions",
+                    "sorting": "a",
+                    "color": "#000000",
+                    "packs": [
+                        "CAAActions"
+                    ]
+                }
+            ]
+        }
+    ],
+    "relationships": {
+        "requires": [
+            {
+                "id": "socketlib",
+                "type": "module",
+                "manifest": "https://github.com/farling42/foundryvtt-socketlib/releases/latest/download/module.json"
+            }
+        ],
+        "recommends": [
+            {
+                "id": "cosmere-rpg-stormlight-handbook",
+                "type": "module",
+                "compatibility": {}
+            },
+            {
+                "id": "cosmere-rpg-stormlight-worldguide",
+                "type": "module",
+                "compatibility": {}
+            }
+        ],
+        "systems": [
+            {
+                "id": "cosmere-rpg",
+                "type": "system",
+                "compatibility": {
+                    "minimum": "1",
+                    "verified": "1"
+                }
+            }
+        ]
+    }
 }

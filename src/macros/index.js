@@ -20,13 +20,18 @@ import { stormlightReclamation } from "./surges/common/stormlight-reclamation.js
 
 
 //Illumination actions
+import { illumination } from "./surges/illumination/illumination.js"
+import { dismissComplexIllusion } from "./surges/illumination/illumination.js"
+import { dismissDisguise } from "./surges/illumination/illumination.js"
 
 
 //Progression actions
+import { progression, cancelCharacterRegrowth } from "./surges/progression/progression.js"
 import { explosiveGrowth } from "./surges/progression/explosive-growth.js"
-import { fromTheBrink } from "./surges/progression/from-the-brink.js"
 import { injuryRegrowth } from "./surges/progression/injury-regrowth.js"
-import { progression } from "./surges/progression/progression.js"
+import { fromTheBrink } from "./surges/progression/from-the-brink.js"
+
+
 
 
 //Tension actions
@@ -79,9 +84,15 @@ export const macros = {
 
 
 	//Illumination actions
-
+	illumination: illumination,
+	"dismiss-complex-illusion": dismissComplexIllusion,
+	"dismiss-disguise": dismissDisguise,
 
 	//Progression actions
+	progression: progression,
+	"injury-regrowth": injuryRegrowth,
+	"cancel-character-regrowth": cancelCharacterRegrowth,
+	"cancel-regrowth-infusion": cancelCharacterRegrowth,
 	"from-the-brink": fromTheBrink,
 
 	//Tension actions
