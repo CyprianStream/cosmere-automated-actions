@@ -12,8 +12,8 @@
         }
     ],
     "url": "https://github.com/CyprianStream/cosmere-automated-actions/",
-    "manifest": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/dev-test/module.json",
-    "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/dev-test/module.zip",
+    "manifest": "https://raw.githubusercontent.com/CyprianStream/cosmere-automated-actions/refs/tags/dev-test/src/module.json",
+    "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/v1.1.2/module.zip",
     "compatibility": {
         "minimum": "12",
         "verified": "12"
