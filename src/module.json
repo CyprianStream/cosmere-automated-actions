@@ -27,7 +27,16 @@
             "label": "CAA Actions",
             "path": "packs/caaactions",
             "type": "Item",
-            "module": "cosmere-automated-actions"
+            "system": "cosmere-rpg"
+        }
+    ],
+    "packFolders": [
+        {
+            "name": "Cosmere Automated Actions",
+            "sorting": "a",
+            "color": "string",
+            "packs": ["CAAActions"],
+            "folders": []
         }
     ],
     "relationships": {

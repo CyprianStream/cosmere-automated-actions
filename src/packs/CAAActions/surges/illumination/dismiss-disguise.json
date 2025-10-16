@@ -6,7 +6,7 @@
         "id": "<id>",
         "type": "basic",
         "description": {
-            "value": "<p>Edit this to describe what this action is and does.</p>",
+            "value": "<p>Dismisses your own Illusion disguise</p>",
             "chat": "",
             "short": ""
         },

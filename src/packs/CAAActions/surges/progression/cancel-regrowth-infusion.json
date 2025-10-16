@@ -5,7 +5,7 @@
     "system": {
         "type": "basic",
         "description": {
-            "value": "<p>Edit this to describe what this piece of equipment is & how it looks.</p>",
+            "value": "<p>Cancels the continous regrowth infusion</p>",
             "chat": "",
             "short": ""
         },
@@ -92,8 +92,7 @@
         }
     ],
     "folder": "atcn34pXpBcZhT2o",
-    "flags": {
-    },
+    "flags": {},
     "ownership": {
         "default": 0
     },
