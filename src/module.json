@@ -2,7 +2,7 @@
     "id": "cosmere-automated-actions",
     "title": "Cosmere Automated Actions",
     "description": "A Module to add automations for some of cosmere's more manual actions",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "library": "false",
     "manifestPlusVersion": "1.2.0",
     "authors": [
@@ -12,8 +12,8 @@
         }
     ],
     "url": "https://github.com/CyprianStream/cosmere-automated-actions/",
-    "manifest": "https://raw.githubusercontent.com/CyprianStream/cosmere-automated-actions/refs/heads/master/src/module.json",
-    "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/v1.1.1/module.zip",
+    "manifest": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/dev-test/module.json",
+    "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/dev-test/module.zip",
     "compatibility": {
         "minimum": "12",
         "verified": "12"
