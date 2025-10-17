@@ -1,10 +1,10 @@
 {
     "name": "Dismiss Complex Illusion",
-    "type": "action",
+    "type": "power",
     "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
     "system": {
         "id": "<id>",
-        "type": "basic",
+        "type": "surge",
         "description": {
             "value": "<p>Dismiss your complex illusion</p>",
             "chat": "",

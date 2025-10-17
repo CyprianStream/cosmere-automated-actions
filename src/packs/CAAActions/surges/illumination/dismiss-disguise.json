@@ -1,10 +1,10 @@
 {
     "name": "Dismiss Disguise",
-    "type": "action",
+    "type": "power",
     "img": "icons/magic/unholy/silhouette-robe-evil-power.webp",
     "system": {
         "id": "<id>",
-        "type": "basic",
+        "type": "surge",
         "description": {
             "value": "<p>Dismisses your own Illusion disguise</p>",
             "chat": "",
