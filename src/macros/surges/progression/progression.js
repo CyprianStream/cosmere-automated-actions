@@ -70,17 +70,21 @@ export async function progression(item, actor){
                 }
                 const characterRegrowth = 1;
                 //Adds "Cancel Regrowth Infusion" item to target
-                const cancelRegrowthInfusion = fromUuid("Compendium.cosmere-automated-actions.CAAActions.Item.5SzzMlt3QUMTwXoF");
+                const cancelRegrowthInfusion = fromUuid("Compendium.cosmere-automated-actions.caaactions.Item.5SzzMlt3QUMTwXoF");
                 const cancelRegrowthInfusionItem = await game.items.fromCompendium(cancelRegrowthInfusion);
-                cancelRegrowthInfusionItem.setFlag("world", "target", target.actor.uuid);
-                cancelRegrowthInfusionItem.setFlag("world", "caster", caster.uuid);
-                actor.createEmbeddedDocuments("Item", [cancelRegrowthInfusionItem]);
+                console.log(cancelRegrowthInfusionItem)
+                const cancelRegrowthInfusionActorItem = await caster.createEmbeddedDocuments("Item", [cancelRegrowthInfusionItem]);
+                const casterItem = cancelRegrowthInfusionActorItem[0]
+                console.log(casterItem)
+                casterItem.setFlag("world", "target", target.actor.uuid);
+                casterItem.setFlag("world", "caster", caster.uuid);
                 //Adds "Cancel Regrowth" item to caster
-                const cancelCharacterRegrowth = fromUuid("Compendium.cosmere-automated-actions.CAAActions.Item.LNAzM5dFOJ4fqqdL");
+                const cancelCharacterRegrowth = fromUuid("Compendium.cosmere-automated-actions.caaactions.Item.LNAzM5dFOJ4fqqdL");
                 const cancelCharacterRegrowthItem = await game.items.fromCompendium(cancelCharacterRegrowth);
-                cancelCharacterRegrowthItem.setFlag("world", "target", target.actor.uuid);
-                cancelCharacterRegrowthItem.setFlag("world", "caster", caster.uuid);
-                target.actor.createEmbeddedDocuments("Item", [cancelCharacterRegrowthItem]);
+                const cancelCharacterRegrowthActorItem = await target.actor.createEmbeddedDocuments("Item", [cancelCharacterRegrowthItem]);
+                const targetItem = cancelCharacterRegrowthActorItem[0]
+                targetItem.setFlag("world", "target", target.actor.uuid);
+                targetItem.setFlag("world", "caster", caster.uuid);
             }
         }]
     })
