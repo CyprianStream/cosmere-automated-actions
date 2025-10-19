@@ -1,3 +1,4 @@
+![Foundry v12](https://img.shields.io/badge/foundry-v12-green) ![Cosmere RPG](https://img.shields.io/badge/cosmere%E2%80%93rpg-v1.0.2-green)
 # Cosmere Automated Actions
 A module to add automations to the CosmereRPG system for FoundryVTT
 
