@@ -14,6 +14,7 @@ import { stormlightReclamation } from "./surges/common/stormlight-reclamation.js
 
 
 //Division actions
+import { division } from "./surges/division/division.js"
 
 
 //Graviatation actions
@@ -78,6 +79,7 @@ export const macros = {
 
 
 	//Division actions
+	division: division,
 
 
 	//Graviatation actions
