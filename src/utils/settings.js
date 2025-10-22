@@ -20,6 +20,16 @@ export const settings = [
         type: Boolean,
         default: true,
         requiresReload: false
+    },
+    {
+        name: "Let conditions modify rolls",
+        id: "automateConditions",
+        hint: "Let conditions like Exhausted apply a modifier to relevant rolls",
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: true,
+        requiresReload: false
     }
 ]
 
