@@ -18,6 +18,7 @@ import { division } from "./surges/division/division.js"
 
 
 //Graviatation actions
+import { dismissLashing, gravitation } from "./surges/gravitation/gravitation.js"
 
 
 //Illumination actions
@@ -83,6 +84,8 @@ export const macros = {
 
 
 	//Graviatation actions
+	gravitation: gravitation,
+	"dismiss-lashing": dismissLashing,
 
 
 	//Illumination actions
