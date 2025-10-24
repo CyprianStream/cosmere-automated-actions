@@ -1,4 +1,4 @@
-![Foundry v12](https://img.shields.io/badge/foundry-v12-green) ![Cosmere RPG](https://img.shields.io/badge/cosmere%E2%80%93rpg-v1.0.2-green)
+![Foundry v12](https://img.shields.io/badge/foundry-v13-green) ![Cosmere RPG](https://img.shields.io/badge/cosmere%E2%80%93rpg-v2.0.0-green)
 # Cosmere Automated Actions
 A module to add automations to the CosmereRPG system for FoundryVTT
 
@@ -16,11 +16,7 @@ Current automated items include:
 - Disquiet
 
 ## Requirements
-To use this module you MUST have the following modules installed
-
-- [libWrapper](https://foundryvtt.com/packages/lib-wrapper)
-
-It is also recommended to have the following paid modules to get the most value out of this module, but it will work with just the base starter rules as well.
+It is recommended to have the following paid modules to get the most value out of this module, but it will work with just the base starter rules as well.
 
 - [Cosmere RPG Stormlight Handbook](https://foundryvtt.com/packages/cosmere-rpg-stormlight-handbook)
 - [Cosmere RPG Stormlight Worldguide](https://foundryvtt.com/packages/cosmere-rpg-stormlight-worldguide)
