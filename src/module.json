@@ -16,7 +16,8 @@
     "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/v1.2.0/module.zip",
     "compatibility": {
         "minimum": "12",
-        "verified": "12"
+        "verified": "13",
+        "maximum": "13"
     },
     "esmodules": [
         "main.js"
@@ -42,13 +43,6 @@
         }
     ],
     "relationships": {
-        "requires": [
-            {
-                "id": "socketlib",
-                "type": "module",
-                "manifest": "https://github.com/farling42/foundryvtt-socketlib/releases/latest/download/module.json"
-            }
-        ],
         "recommends": [
             {
                 "id": "cosmere-rpg-stormlight-handbook",
@@ -67,7 +61,7 @@
                 "type": "system",
                 "compatibility": {
                     "minimum": "1",
-                    "verified": "1"
+                    "verified": "2.0.0"
                 }
             }
         ]
