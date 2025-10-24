@@ -30,6 +30,16 @@ export const settings = [
         type: Boolean,
         default: true,
         requiresReload: false
+    },
+    {
+        name: "Automatically Decrement Exhaustion",
+        id: "decrementExhaustion",
+        hint: "Remove one stack of exhaustion on long rest",
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: true,
+        requiresReload: false
     }
 ]
 

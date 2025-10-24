@@ -30,6 +30,7 @@ Hooks.on('cosmere-rpg.attackRoll', (roll, item, _options) => {
     if(!game.settings.get(MODULE_ID, "automateConditions")){
         return
     }
+    const actor = item.actor
     console.log("CAA | Applying Roll Conditions")
     applyRollConditions(roll, actor)
 })
@@ -44,7 +45,7 @@ Hooks.on('cosmere-rpg.skillRoll', (roll, actor, _options) => {
 })
 
 Hooks.on('cosmere-rpg.rest', (actor, length) => {
-	if(!game.settings.get(MODULE_ID, "automateConditions")){
+	if(!game.settings.get(MODULE_ID, "decrementExhaustion")){
         return
     }
 	if(actor.effects.get("condexhausted000") && length === "long"){
