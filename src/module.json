@@ -2,7 +2,7 @@
     "id": "cosmere-automated-actions",
     "title": "Cosmere Automated Actions",
     "description": "A Module to add automations for some of cosmere's more manual actions",
-    "version": "1.1.6",
+    "version": "1.2.0",
     "library": "false",
     "manifestPlusVersion": "1.2.0",
     "authors": [
@@ -13,10 +13,11 @@
     ],
     "url": "https://github.com/CyprianStream/cosmere-automated-actions/",
     "manifest": "https://raw.githubusercontent.com/CyprianStream/cosmere-automated-actions/refs/heads/master/src/module.json",
-    "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/v1.1.6/module.zip",
+    "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/v1.2.0/module.zip",
     "compatibility": {
-        "minimum": "12",
-        "verified": "12"
+        "minimum": "13",
+        "verified": "13",
+        "maximum": "13"
     },
     "esmodules": [
         "main.js"
@@ -35,18 +36,13 @@
             "name": "Cosmere Automated Actions",
             "sorting": "a",
             "color": "string",
-            "packs": ["caaactions"],
+            "packs": [
+                "caaactions"
+            ],
             "folders": []
         }
     ],
     "relationships": {
-        "requires": [
-            {
-                "id": "socketlib",
-                "type": "module",
-                "manifest": "https://github.com/farling42/foundryvtt-socketlib/releases/latest/download/module.json"
-            }
-        ],
         "recommends": [
             {
                 "id": "cosmere-rpg-stormlight-handbook",
@@ -65,7 +61,7 @@
                 "type": "system",
                 "compatibility": {
                     "minimum": "1",
-                    "verified": "1"
+                    "verified": "2.0.0"
                 }
             }
         ]

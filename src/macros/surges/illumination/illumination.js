@@ -1,3 +1,4 @@
+import { giveActorItem } from "../../../utils/helpers";
 export async function illumination(item, actor){
     let illuminationDialog = await foundry.applications.api.DialogV2.wait({
         window: { title: "Illumination" },
@@ -15,9 +16,8 @@ export async function illumination(item, actor){
                 action: "complex-illusion",
                 callback: async () => {
                     //adds "Dismiss Complex Illusion" item to actor
-                    const dismissComplexIllusion = fromUuid("Compendium.cosmere-automated-actions.caaactions.Item.EZqaHREQyTkBiRIb");
-                    const dismissComplexIllusionItem = await game.items.fromCompendium(dismissComplexIllusion);
-                    actor.createEmbeddedDocuments("Item", [dismissComplexIllusionItem]);
+                    const dismissComplexIllusionUUID = "Compendium.cosmere-automated-actions.caaactions.Item.EZqaHREQyTkBiRIb"
+                    const dismissComplexIllusion = await giveActorItem(actor, dismissLashingUUID)
                 }
             },
             {
@@ -25,9 +25,8 @@ export async function illumination(item, actor){
                 action: "disguise-yourself",
                 callback: async () => {
                     //adds "Dismiss Disguise" item to actor
-                    const dismissDisguise = fromUuid("Compendium.cosmere-automated-actions.caaactions.Item.3SdIMgwufXgAfQmM");
-                    const dismissDisguiseItem = await game.items.fromCompendium(dismissDisguise);
-                    actor.createEmbeddedDocuments("Item", [dismissDisguiseItem]);
+                    const dismissDisguiseUUID = "Compendium.cosmere-automated-actions.caaactions.Item.3SdIMgwufXgAfQmM"
+                    const dismissDisguise = await giveActorItem(actor, dismissDisguiseUUID)
                 }
             }
         ]

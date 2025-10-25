@@ -1,19 +1,17 @@
 {
-    "name": "Dismiss Complex Illusion",
+    "folder": "6t3xjoGaMnufAVPf",
+    "name": "Dismiss Lashing",
     "type": "power",
-    "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+    "_id": "TcddNgIyb1GGZGXn",
+    "img": "icons/magic/earth/projectile-stone-ball-blue.webp",
     "system": {
-        "id": "<id>",
+        "id": "dismiss-lashing",
         "type": "surge",
-        "description": {
-            "value": "<p>Dismiss your complex illusion</p>",
-            "chat": "",
-            "short": ""
-        },
         "activation": {
             "type": "none",
             "cost": {
-                "value": null
+                "value": null,
+                "type": null
             },
             "consume": [],
             "flavor": "",
@@ -23,16 +21,24 @@
             "complication": null,
             "uses": null
         },
-        "damage": {},
-        "modality": null,
+        "damage": {
+            "formula": null,
+            "type": null
+        },
+        "description": {
+            "value": "<p>Dismiss your current lashing</p>",
+            "chat": "",
+            "short": ""
+        },
         "events": {},
         "relationships": {},
-        "ancestry": null
+        "customSkill": false,
+        "skill": null
     },
     "effects": [
         {
             "name": "Draining Stormlight",
-            "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
+            "img": "icons/magic/earth/projectile-stone-ball-blue.webp",
             "disabled": false,
             "duration": {
                 "rounds": 1,
@@ -43,7 +49,7 @@
                 "startRound": null,
                 "startTurn": null
             },
-            "_id": "QOz6dlHNawFYlXe3",
+            "_id": "7cCTAZGUll6QZp2N",
             "type": "base",
             "system": {
                 "isStackable": false,
@@ -63,19 +69,17 @@
                 "coreVersion": "12.343",
                 "systemId": "cosmere-rpg",
                 "systemVersion": "1.0.2",
-                "createdTime": null,
-                "modifiedTime": null,
-                "lastModifiedBy": null
+                "createdTime": 1761238581182,
+                "modifiedTime": 1761238602431,
+                "lastModifiedBy": "bxGCma3Vmpied3qx"
             },
-            "_key": "!items.effects!EZqaHREQyTkBiRIb.QOz6dlHNawFYlXe3"
+            "_key": "!items.effects!TcddNgIyb1GGZGXn.7cCTAZGUll6QZp2N"
         }
     ],
-    "folder": "t6TK4I1u7tBI6pPs",
+    "sort": 0,
     "ownership": {
         "default": 0
     },
     "flags": {},
-    "_id": "EZqaHREQyTkBiRIb",
-    "sort": 0,
-    "_key": "!items!EZqaHREQyTkBiRIb"
+    "_key": "!items!TcddNgIyb1GGZGXn"
 }

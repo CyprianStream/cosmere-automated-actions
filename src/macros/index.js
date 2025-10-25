@@ -14,9 +14,11 @@ import { stormlightReclamation } from "./surges/common/stormlight-reclamation.js
 
 
 //Division actions
+import { division } from "./surges/division/division.js"
 
 
 //Graviatation actions
+import { dismissLashing, gravitation } from "./surges/gravitation/gravitation.js"
 
 
 //Illumination actions
@@ -78,9 +80,12 @@ export const macros = {
 
 
 	//Division actions
+	division: division,
 
 
 	//Graviatation actions
+	gravitation: gravitation,
+	"dismiss-lashing": dismissLashing,
 
 
 	//Illumination actions
