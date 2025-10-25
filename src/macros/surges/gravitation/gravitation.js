@@ -1,3 +1,4 @@
+import { giveActorItem } from "../../../utils/helpers";
 
 export async function gravitation(item, actor){
     const target = game.user.targets.first();
@@ -24,28 +25,19 @@ export async function gravitation(item, actor){
                     //If roll fails, return
                 }
                     //Adds "Dismiss Lashing" to user
-                    const dismissLashing = fromUuid("Compendium.cosmere-automated-actions.caaactions.Item.TcddNgIyb1GGZGXn");
-                    const dismissLashingItem = await game.items.fromCompendium(dismissLashing);
-                    console.log(dismissLashing)
-                    const dismissLashingActorItem = await actor.createEmbeddedDocuments("Item", [dismissLashingItem]);
-                    const actorItem = dismissLashingActorItem[0]
-                    console.log(actorItem)
-                    actorItem.setFlag("world", "target", target.actor.uuid);
-                
-                
+                    const dismissLashingUUID = "Compendium.cosmere-automated-actions.caaactions.Item.TcddNgIyb1GGZGXn"
+                    const dismissLashing = await giveActorItem(actor, dismissLashingUUID)
+                    dismissLashing.setFlag("world", "target", target.actor.uuid);
+                    dismissLashing.setFlag("world", "caster", actor.uuid)
             }
         },
         {
             label: "Object",
             action: "object",
             callback: async () => {
-                const dismissLashing = fromUuid("Compendium.cosmere-automated-actions.caaactions.Item.TcddNgIyb1GGZGXn");
-                const dismissLashingItem = await game.items.fromCompendium(dismissLashing);
-                console.log(dismissLashing)
-                const dismissLashingActorItem = await actor.createEmbeddedDocuments("Item", [dismissLashingItem]);
-                const actorItem = dismissLashingActorItem[0]
-                console.log(actorItem)
-                actorItem.setFlag("world", "target", "item");
+                const dismissLashingUUID = "Compendium.cosmere-automated-actions.caaactions.Item.TcddNgIyb1GGZGXn"
+                const dismissLashing = await giveActorItem(actor, dismissLashingUUID)
+                dismissLashing.setFlag("world", "target", "item");
             }
         }]
     })

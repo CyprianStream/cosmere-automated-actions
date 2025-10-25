@@ -24,3 +24,8 @@ export async function activateItemEffect(itemName, effectName){
     const effect = actor.items.getName(itemName).effects.getName(effectName);
     await effect.update({ disabled: !effect.disabled });
 }
+export async function giveActorItem(actor, itemUUID){
+    const itemId = await fromUuid(itemUUID);
+    const item = await Item.create(itemId.toObject(), { parent: actor });
+    return item
+}
