@@ -35,7 +35,7 @@
         {
             "name": "Cosmere Automated Actions",
             "sorting": "a",
-            "color": "string",
+            "color": "#300040",
             "packs": [
                 "caaactions"
             ],
