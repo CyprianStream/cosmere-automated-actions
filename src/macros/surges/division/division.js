@@ -17,29 +17,34 @@ export async function division(item, actor){
                         actor.update({ 'system.resources.inv.value': newInv })
                         return;
                     }
-                    //TODO make this into a system attack roll instead of basic foundry roll
-                    //makes attack roll against spiritual defense
-                    const rollData = actor.getRollData()
-                    const targetSpiritDefense = target.actor.system.defenses.spi.value
-                    console.log(targetSpiritDefense)
-                    let attackRoll = await new Roll("1d20 + @skills.dvs.mod", rollData).evaluate()
-                    await attackRoll.toMessage({
-                        speaker: ChatMessage.getSpeaker({ actor: actor }),
-                        flavor: `${actor.name} rolls to hit ${target.name}`,
-                    })
-                    if(attackRoll.total >= targetSpiritDefense){
-                        //rolls damage
-                        let r = await new Roll("3@scalar.power.dvs.die", rollData).evaluate()
-                        const targetHealth = target.actor.system.resources.hea.value
-                        const newHealth = targetHealth - r.total
-                        target.actor.update({ 'system.resources.hea.value': newHealth })            
-                        await r.toMessage({
-                            speaker: ChatMessage.getSpeaker({ actor: actor }),
-                            flavor: `${target.name} burns away a little...`,
-                        })
+                    //makes attack roll
+                    if(!item.system.damage.formula){
+                        item.system.damage.formula = "3@scalar.power.dvs.die"
                     }
+                    const rollOptions = {
+                        skillTest: {
+                            skill: "dvs",
+                        },
+                        chatMessage: false,
+                    }
+                    let attackRoll = await item.rollAttack(rollOptions)
+                    const messageConfig = {
+                        user: game.user.id,
+                        speaker: ChatMessage.getSpeaker({ actor }),
+                        rolls: [attackRoll[0], attackRoll[1][0]],
+                        flags: {}
+                    };
+
+                    messageConfig.flags["cosmere-rpg"] = {
+                        message: {
+                            type: 'action',
+                            description: await item.getDescriptionHTML(),
+                            item: item.id,
+                        },
+                    };
+                    // Create chat message
+                    await ChatMessage.create(messageConfig);
                 }
-                
             },
             {
                 label: "Area",
@@ -95,7 +100,7 @@ export async function division(item, actor){
                         const chatMessageData = {
                             author: game.user,
                             speaker: ChatMessage.getSpeaker({ actor }),
-                            content: `${actor.name} uses division on a ${areaSize} object or area`,    
+                            content: `${actor.name} uses ${item.name} on a ${areaSize} object or area`,    
                         }
                     await getDocumentClass("ChatMessage").create(chatMessageData)
                     } else {
