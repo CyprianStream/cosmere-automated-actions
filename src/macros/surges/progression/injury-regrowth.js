@@ -10,12 +10,12 @@ export async function injuryRegrowth(item, actor){
     injuries.forEach(injury => {
         const injuryItem = injury
         if(injury.system.type === "permanent_injury"){
+            const actorInv = actor.system.resources.inv.value
             const buttonLabel = injury.name + " (-1 inv)"
             injuryRegrowthButtons.push({ 
                 label: buttonLabel,
                 action: injury.uuid,
                 callback: async () => {
-                    console.log(actorInv)
                     if(actorInv < 1){
                         const newValue = actorInv + 2
                         ui.notifications.warn("Not enough Investiture to heal a Permanant Injury");
@@ -27,7 +27,6 @@ export async function injuryRegrowth(item, actor){
                     injuryItem.delete()
                 }
             })
-            console.log("Added permanent injury")
         } else if (injury.system.type === "death") {
             return
         } else {
@@ -41,6 +40,10 @@ export async function injuryRegrowth(item, actor){
             console.log("Added non permanant injury")
         }
     });
+    if(injuryRegrowthButtons.length === 0){
+        ui.notifications.warn("No possible injuries to heal");
+        return
+    }
     let dialogWindow = await foundry.applications.api.DialogV2.wait({
         window: { title: "Injury Regrowth" },
         content: "<p>What would you like to heal?</p>",

@@ -1,3 +1,5 @@
+import { giveActorItem } from "../../../utils/helpers";
+
 export async function progression(item, actor){
     const target = game.user.targets.first();
     const actorProgressionRank = actor.system.skills.prg.rank;
@@ -70,21 +72,16 @@ export async function progression(item, actor){
                 }
                 const characterRegrowth = 1;
                 //Adds "Cancel Regrowth Infusion" item to target
-                const cancelRegrowthInfusion = fromUuid("Compendium.cosmere-automated-actions.caaactions.Item.5SzzMlt3QUMTwXoF");
-                const cancelRegrowthInfusionItem = await game.items.fromCompendium(cancelRegrowthInfusion);
-                console.log(cancelRegrowthInfusionItem)
-                const cancelRegrowthInfusionActorItem = await caster.createEmbeddedDocuments("Item", [cancelRegrowthInfusionItem]);
-                const casterItem = cancelRegrowthInfusionActorItem[0]
-                console.log(casterItem)
-                casterItem.setFlag("world", "target", target.actor.uuid);
-                casterItem.setFlag("world", "caster", caster.uuid);
+                const cancelRegrowthInfusionUUID = "Compendium.cosmere-automated-actions.caaactions.Item.5SzzMlt3QUMTwXoF"
+                const cancelRegrowthInfusion = await giveActorItem(actor, cancelRegrowthInfusionUUID)
+                cancelRegrowthInfusion.setFlag("world", "target", target.actor.uuid);
+                cancelRegrowthInfusion.setFlag("world", "caster", caster.uuid);
                 //Adds "Cancel Regrowth" item to caster
-                const cancelCharacterRegrowth = fromUuid("Compendium.cosmere-automated-actions.caaactions.Item.LNAzM5dFOJ4fqqdL");
-                const cancelCharacterRegrowthItem = await game.items.fromCompendium(cancelCharacterRegrowth);
-                const cancelCharacterRegrowthActorItem = await target.actor.createEmbeddedDocuments("Item", [cancelCharacterRegrowthItem]);
-                const targetItem = cancelCharacterRegrowthActorItem[0]
-                targetItem.setFlag("world", "target", target.actor.uuid);
-                targetItem.setFlag("world", "caster", caster.uuid);
+                console.log(target.actor)
+                const cancelCharacterRegrowthUUID = "Compendium.cosmere-automated-actions.caaactions.Item.LNAzM5dFOJ4fqqdL"
+                const cancelCharacterRegrowth = await giveActorItem(target.actor, cancelCharacterRegrowthUUID)
+                cancelCharacterRegrowth.setFlag("world", "target", target.actor.uuid);
+                cancelCharacterRegrowth.setFlag("world", "caster", caster.uuid);
             }
         }]
     })
