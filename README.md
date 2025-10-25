@@ -14,6 +14,11 @@ Current automated items include:
 - Progression
 - Injury Regrowth
 - Disquiet
+- Division
+- Gravitation
+
+Additional Automations include:
+- Exhausted Condition
 
 ## Requirements
 It is recommended to have the following paid modules to get the most value out of this module, but it will work with just the base starter rules as well.
@@ -26,7 +31,6 @@ I will be slowly adding automations to features as I have need for them, or feel
 Current items planned for automation include:
 
 - Explosive Growth
-- Gravitation
 - Gravitational Slam
 - Mighty
 
