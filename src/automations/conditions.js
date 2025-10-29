@@ -2,18 +2,21 @@
 
 export function applyRollConditions(roll, actor){
     if(actor.effects.contents.length === 0){
-        console.log("CAA | No effects found")
-        return
-    }
+        console.log("CAA | No effects found");
+        return;
+    };
     let baseDie = roll.parts.substring(0, roll.parts.indexOf(' '));
     let modifiers = roll.parts.substring(roll.parts.indexOf(' ') + 1);
+    //checks each effect of actor against list of conditions
     actor.effects.forEach(effect => {
         switch(effect.id){
             case"condexhausted000":
-                const newOperator = new foundry.dice.terms.OperatorTerm({operator: "-"})
-                const newTerm = new foundry.dice.terms.NumericTerm({number: effect.system.stacks})
-                modifiers = modifiers + " - " + effect.system.stacks
-                roll.terms.push(newOperator, newTerm)
+                //THIS WILL NEED TO BE UPDATED AFTER UPCOMING ROLL REFACTOR
+                //Applies exhausted modifier equal to each roll
+                const newOperator = new foundry.dice.terms.OperatorTerm({operator: "-"});
+                const newTerm = new foundry.dice.terms.NumericTerm({number: effect.system.stacks});
+                modifiers = modifiers + " - " + effect.system.stacks;
+                roll.terms.push(newOperator, newTerm);
             break
             case"condafflicted000":
                 //No need to automate as part of a roll
@@ -59,13 +62,13 @@ export function applyRollConditions(roll, actor){
             break
         }
     });
-    roll.parts = baseDie + " " + modifiers
-    roll.resetFormula()
+    roll.parts = baseDie + " " + modifiers;
+    roll.resetFormula();
 }
 
 export async function decrementExhausted(actor){
-    const effect = actor.effects.get("condexhausted000")
-    const currentStacks = effect.stacks
+    const effect = actor.effects.get("condexhausted000");
+    const currentStacks = effect.stacks;
     const newStacks = effect.stacks - 1;
         if (newStacks > 0) {
             // Update the effect

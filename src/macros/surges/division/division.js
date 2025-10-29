@@ -1,8 +1,10 @@
+import { getFirstTarget } from "../../../utils/helpers";
+
 export async function division(item, actor){
-    const target = game.user.targets.first();
+    const target = getFirstTarget();
     const actorDivisionRank = actor.system.skills.dvs.rank;
     //prompt user for target mode
-    let divisionDialog = await foundry.applications.api.DialogV2.wait({
+    await foundry.applications.api.DialogV2.wait({
         window: { title: "Division" },
         content: "<p>What would you like to target?</p>",
         buttons: [
@@ -10,31 +12,32 @@ export async function division(item, actor){
                 label: "Character",
                 action: "character",
                 callback: async () => {
-                    const currentInv = actor.system.resources.inv.value
+                    //If attacking character, makes attack roll and post it to chat
+                    const currentInv = actor.system.resources.inv.value;
                     if(!target){
                         ui.notifications.warn("Needs target");
-                        const newInv = currentInv + 1
-                        actor.update({ 'system.resources.inv.value': newInv })
+                        const newInv = currentInv + 1;
+                        actor.update({ 'system.resources.inv.value': newInv });
                         return;
-                    }
+                    };
                     //makes attack roll
                     if(!item.system.damage.formula){
-                        item.system.damage.formula = "3@scalar.power.dvs.die"
-                    }
+                        item.system.damage.formula = "3@scalar.power.dvs.die";
+                    };
                     const rollOptions = {
                         skillTest: {
                             skill: "dvs",
                         },
                         chatMessage: false,
-                    }
-                    let attackRoll = await item.rollAttack(rollOptions)
+                    };
+                    let attackRoll = await item.rollAttack(rollOptions);
                     const messageConfig = {
                         user: game.user.id,
                         speaker: ChatMessage.getSpeaker({ actor }),
                         rolls: [attackRoll[0], attackRoll[1][0]],
                         flags: {}
                     };
-
+                    // Create chat message
                     messageConfig.flags["cosmere-rpg"] = {
                         message: {
                             type: 'action',
@@ -42,7 +45,6 @@ export async function division(item, actor){
                             item: item.id,
                         },
                     };
-                    // Create chat message
                     await ChatMessage.create(messageConfig);
                 }
             },
@@ -50,14 +52,16 @@ export async function division(item, actor){
                 label: "Area",
                 action: "area",
                 callback: async () => {
-                    const currentInv = actor.system.resources.inv.value
+                    //If attacking an area, subtract investiture based on size, then output chat message
+                    //TODO add area effect
+                    const currentInv = actor.system.resources.inv.value;
                     const infusionCost = {
                         gargantuan: 4,
                         huge:3,
                         large:2,
                         medium:1,
                         small:0
-                    }
+                    };
                     let divisionAreaButtons = []
                     switch (actorDivisionRank){
                         default:
@@ -87,32 +91,32 @@ export async function division(item, actor){
                                 action: "small"
                             });
                         break;
-                    }
+                    };
+                    //Prompts user for how big of an area they are attacking
                     const divisionAreaDialog = await foundry.applications.api.DialogV2.wait({
                         window:{ title: "Division"},
                         content: "How large is your target area?",
                         buttons: divisionAreaButtons
-                    })
-                    const areaSize = divisionAreaDialog
-                    let newInv = currentInv - infusionCost[areaSize]
+                    });
+                    const areaSize = divisionAreaDialog;
+                    let newInv = currentInv - infusionCost[areaSize];
                     if(newInv >= 0){
                         actor.update({ 'system.resources.inv.value': newInv })
                         const chatMessageData = {
                             author: game.user,
                             speaker: ChatMessage.getSpeaker({ actor }),
                             content: `${actor.name} uses ${item.name} on a ${areaSize} object or area`,    
-                        }
-                    await getDocumentClass("ChatMessage").create(chatMessageData)
+                        };
+                        await getDocumentClass("ChatMessage").create(chatMessageData);
                     } else {
-                        newInv = currentInv + 1
+                        newInv = currentInv + 1;
                         ui.notifications.warn("Not enough investiture for infusion of that size");
-                        actor.update({ 'system.resources.inv.value': newInv })
-                    }
+                        actor.update({ 'system.resources.inv.value': newInv });
+                    };
                     
                     
                 }
             }
         ]
-    })
-    divisionDialog;
+    });
 }

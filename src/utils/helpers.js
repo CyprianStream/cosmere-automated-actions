@@ -9,10 +9,10 @@ export function nameToId(str) {
 
 //Actor Functions
 export function getFirstTarget(){
-    Array.from(game.user.targets)[0].actor.uuid
+    return game.user.targets.first();
 }
 export function getAllTargets(){
-
+    return game.user.targets
 }
 
 //Item Functions
@@ -27,5 +27,14 @@ export async function activateItemEffect(itemName, effectName){
 export async function giveActorItem(actor, itemUUID){
     const itemId = await fromUuid(itemUUID);
     const item = await Item.create(itemId.toObject(), { parent: actor });
-    return item
+    return item;
+}
+export function getFlags(item){
+    const cosmereFlags = item.flags["cosmere-automated-actions"];
+    const worldFlags = item.flags["world"];
+    if(cosmereFlags){
+        return cosmereFlags;
+    } else {
+        return worldFlags;
+    }
 }
