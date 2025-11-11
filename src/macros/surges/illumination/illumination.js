@@ -1,6 +1,7 @@
 import { giveActorItem } from "../../../utils/helpers";
+
 export async function illumination(item, actor){
-    let illuminationDialog = await foundry.applications.api.DialogV2.wait({
+    await foundry.applications.api.DialogV2.wait({
         window: { title: "Illumination" },
         content: "<p>What would you like to lightweave?</p>",
         buttons: [
@@ -16,8 +17,8 @@ export async function illumination(item, actor){
                 action: "complex-illusion",
                 callback: async () => {
                     //adds "Dismiss Complex Illusion" item to actor
-                    const dismissComplexIllusionUUID = "Compendium.cosmere-automated-actions.caaactions.Item.EZqaHREQyTkBiRIb"
-                    const dismissComplexIllusion = await giveActorItem(actor, dismissLashingUUID)
+                    const dismissComplexIllusionUUID = "Compendium.cosmere-automated-actions.caaactions.Item.EZqaHREQyTkBiRIb";
+                    const dismissComplexIllusion = await giveActorItem(actor, dismissComplexIllusionUUID);
                 }
             },
             {
@@ -25,43 +26,29 @@ export async function illumination(item, actor){
                 action: "disguise-yourself",
                 callback: async () => {
                     //adds "Dismiss Disguise" item to actor
-                    const dismissDisguiseUUID = "Compendium.cosmere-automated-actions.caaactions.Item.3SdIMgwufXgAfQmM"
-                    const dismissDisguise = await giveActorItem(actor, dismissDisguiseUUID)
+                    const dismissDisguiseUUID = "Compendium.cosmere-automated-actions.caaactions.Item.3SdIMgwufXgAfQmM";
+                    const dismissDisguise = await giveActorItem(actor, dismissDisguiseUUID);
                 }
             }
         ]
     })
-    illuminationDialog;
     
 }
 
 export function dismissComplexIllusion(item){
-    item.delete()
+    item.delete();
 }
 export function dismissDisguise(item){
-    item.delete()
+    item.delete();
 }
 
-function complexIllusionRound(item, actor){
+export function complexIllusionRound(item, actor){
+    //Subtracts 1 investiture from actor every combat round
     const actorInv = actor.system.resources.inv.value;
     if(actorInv < 1){
-            dismissComplexIllusion(item);
-            return;
-        }
-        const newInv = actorInv - 1;
-        caster.update({ 'system.resources.inv.value': newInv });
+        dismissComplexIllusion(item);
+        return;
+    }
+    const newInv = actorInv - 1;
+    actor.update({ 'system.resources.inv.value': newInv });
 }
-
-Hooks.on('combatTurnChange', (cosmereCombat) => {
-    //loops through combatants looking for "Dismiss Complex Illusion" item, executing each ones round macro
-    cosmereCombat.turns.forEach((combatant)=>{
-        if(!combatant.defeated){
-            const actor = game.actors.get(combatant.actorId);
-            if (actor.items.getName("Dismiss Complex Illusion")){
-                const item = actor.items.getName("Dismiss Complex Illusion");
-                complexIllusionRound(item, actor);
-            }
-        }
-    })
-
-})

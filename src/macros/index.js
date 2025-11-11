@@ -18,20 +18,21 @@ import { division } from "./surges/division/division.js"
 
 
 //Graviatation actions
-import { dismissLashing, gravitation } from "./surges/gravitation/gravitation.js"
+import { dismissLashing, gravitation, gravitationRound } from "./surges/gravitation/gravitation.js"
 
 
 //Illumination actions
-import { illumination } from "./surges/illumination/illumination.js"
+import { illumination, complexIllusionRound } from "./surges/illumination/illumination.js"
 import { dismissComplexIllusion } from "./surges/illumination/illumination.js"
 import { dismissDisguise } from "./surges/illumination/illumination.js"
 
 
 //Progression actions
-import { progression, cancelCharacterRegrowth } from "./surges/progression/progression.js"
+import { progression, cancelCharacterRegrowth, characterRegrowthRound } from "./surges/progression/progression.js"
 import { explosiveGrowth } from "./surges/progression/explosive-growth.js"
 import { injuryRegrowth } from "./surges/progression/injury-regrowth.js"
 import { fromTheBrink } from "./surges/progression/from-the-brink.js"
+
 
 
 
@@ -123,6 +124,60 @@ export const macros = {
 
 	//Adversary unique
 	disquiet: disquiet,
+
+	//Basic Macros
+}
+
+export const roundIncriment = {
+	//Common stormlight actions
+	
+
+	//Abrasion actions
+
+
+	//Adhesion actions
+
+
+	//Cohesion actions
+
+
+	//Division actions
+	
+
+
+	//Graviatation actions
+	"dismiss-lashing": gravitationRound,
+
+
+	//Illumination actions
+	"dismiss-complex-illusion": complexIllusionRound,
+	
+
+	//Progression actions
+	"cancel-regrowth-infusion": characterRegrowthRound,
+
+	//Tension actions
+
+
+	//Transformation actions
+
+
+	//Transportation actions
+
+
+	//Adversary actions
+
+
+	//Adversary features
+
+
+	//Adversary stormlight actions and features
+
+
+	//Adversary strikes
+
+
+	//Adversary unique
 
 	//Basic Macros
 }
