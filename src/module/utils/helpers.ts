@@ -1,6 +1,7 @@
 import { CosmereItem, CosmereActor, CosmereActiveEffect } from "@system/documents";
 import { MODULE_ID } from "@module/constants";
 
+const DEBUG = true;
 //Module Functions
 export function IsModuleActive(moduleId: string) {
 	return game.modules?.get(moduleId)?.active;

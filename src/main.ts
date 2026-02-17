@@ -25,8 +25,6 @@ declare global{
         endTurnItemMap: typeof endTurnItemMap,
         endTurnEffectMap: typeof endTurnEffectMap,
     };
-
-    const DEBUG = false;
 }
 
 Hooks.once('init', () => {
