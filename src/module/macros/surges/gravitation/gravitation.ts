@@ -1,5 +1,5 @@
 import { CosmereItem, CosmereActor, CosmereActiveEffect } from "@system/documents";
-import { getFirstTarget, giveActorItem, log } from "@module/utils/helpers";
+import { getFirstTarget, giveActorEffect, giveActorItem, log } from "@module/utils/helpers";
 import { GRV } from "./talent-ids";
 import { getSurgeTalents, expendInvestiture, useCanceled, getInfusionInvestiture } from "../helpers/surge-helpers";
 import { MODULE_ID } from "@src/module/constants";
@@ -203,14 +203,14 @@ export async function selfGravitationCancelInvEmpty(actor: CosmereActor){
 //#region Helpers
 async function applyFriendlyGravitationInfusion(item: CosmereItem, actor: CosmereActor){
     const target = getFirstTarget();
+    const caster = actor
     if(!target){
         ui.notifications?.warn("Needs target");
         useCanceled(item, actor);
         return;
     }
-    const caster = actor
-    if(!target){
-        ui.notifications?.warn("Needs target");
+    else if(!target.actor){
+        ui.notifications?.warn("Needs target with an actor");
         useCanceled(item, actor);
         return;
     }
@@ -229,7 +229,7 @@ async function applyFriendlyGravitationInfusion(item: CosmereItem, actor: Cosmer
         //Adds "Gravitation Infusion" item to target
         var gravitationInfusionEffectCreateData = await getFriendlyGravitationEffectCreateData(actor, cancelGravitationCaster, infusedInvestiture);
 
-        const gravitationInfusionEffect = await ActiveEffect.create(gravitationInfusionEffectCreateData, {parent: target.actor});
+        const gravitationInfusionEffect = await giveActorEffect(target.actor, gravitationInfusionEffectCreateData);
         cancelGravitationCaster.setFlag(MODULE_ID, "effectsUuids", [gravitationInfusionEffect?.uuid!]);
     }
 }

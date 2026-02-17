@@ -1,5 +1,5 @@
 import { CosmereActiveEffect, CosmereActor, CosmereItem } from "@system/documents";
-import { getFirstTarget, giveActorItem } from "../../../utils/helpers";
+import { getFirstTarget, giveActorEffect, giveActorItem } from "../../../utils/helpers";
 import { MODULE_ID } from "@src/module/constants";
 import { expendInvestiture, getSurgeTalents, sizes, getInfusionInvestiture, useCanceled } from "../helpers/surge-helpers";
 import { PRG } from "./talent-ids";
@@ -147,14 +147,17 @@ async function applyRegrowthInfusion(item: CosmereItem, actor: CosmereActor){
         useCanceled(item, actor);
         return;
     }
+    else if(!target.actor){
+        ui.notifications?.warn("Needs target with an actor");
+        useCanceled(item, actor);
+        return;
+    }
     let infusedInvestiture = await getInfusionInvestiture(item, actor);
 
     //Adds "Cancel Regrowth" item to caster
     const cancelRegrowthCasterUUID = "Compendium.cosmere-automated-actions.caaactions.Item.LNAzM5dFOJ4fqqdL";
     const cancelRegrowthCaster = await giveActorItem(actor, cancelRegrowthCasterUUID)
     if(cancelRegrowthCaster) {
-        cancelRegrowthCaster.setFlag(MODULE_ID, "target", target.actor?.uuid!);
-        cancelRegrowthCaster.setFlag(MODULE_ID, "caster", caster.uuid);
 
         //Adds "Regrowth Infusion" item to target
         const regrowthInfusionEffectCreateData: ActiveEffect.CreateData = {
@@ -186,7 +189,7 @@ async function applyRegrowthInfusion(item: CosmereItem, actor: CosmereActor){
                 }
             }
         };
-        const regrowthInfusionEffect = await ActiveEffect.create(regrowthInfusionEffectCreateData, {parent: target.actor});
+        const regrowthInfusionEffect = await giveActorEffect(target.actor, regrowthInfusionEffectCreateData);
         cancelRegrowthCaster.setFlag(MODULE_ID, "effectsUuids", [regrowthInfusionEffect?.uuid!]);
     }
 }
