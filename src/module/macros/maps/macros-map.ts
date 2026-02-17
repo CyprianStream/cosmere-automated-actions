@@ -1,8 +1,3 @@
-//Common stormlight actions
-import { breatheStormlight } from "../surges/common/breathe-stormlight.js"
-import { enhance } from "../surges/common/enhance.js"
-import { stormlightReclamation } from "../surges/common/stormlight-reclamation.js"
-
 //Abrasion actions
 
 
@@ -55,9 +50,6 @@ import { MacroFunc } from "../index.js"
 
 export var macrosMap: Map<string, MacroFunc> = new Map<string, MacroFunc>([
 	//Common stormlight actions
-	["breathe-stormlight", breatheStormlight as MacroFunc],
-	["enhance", enhance as MacroFunc],
-	["stormlight-reclamation", stormlightReclamation as MacroFunc],
 
 	//Abrasion actions
 
