@@ -1,5 +1,5 @@
 import { CosmereItem, CosmereActor, CosmereActiveEffect } from "@system/documents";
-import { getFirstTarget, giveActorEffect, giveActorItem, log } from "@module/utils/helpers";
+import { deleteDescendantUuids, getFirstTarget, giveActorEffect, giveActorItem, log } from "@module/utils/helpers";
 import { GRV } from "./talent-ids";
 import { getSurgeTalents, expendInvestiture, useCanceled, getInfusionInvestiture } from "../helpers/surge-helpers";
 import { MODULE_ID } from "@src/module/constants";
@@ -128,10 +128,7 @@ export async function gravitation(item: CosmereItem, actor: CosmereActor){
 
 export async function cancelGravitationInfusion(cancelItem: CosmereItem, actor: CosmereActor){
     //finds items from target and caster and deletes it
-    for(const effectUuid of cancelItem.getFlag(MODULE_ID, "effectsUuids")){
-        const effectToDelete = await fromUuid(effectUuid) as CosmereActiveEffect;
-        effectToDelete.delete();
-    }
+    deleteDescendantUuids(cancelItem.getFlag(MODULE_ID, "descendantUuids"));
     cancelItem.delete();
 }
 //#endregion
@@ -140,7 +137,7 @@ export async function cancelGravitationInfusion(cancelItem: CosmereItem, actor: 
 //#region Start Turn Effects
 
 export async function gravitationTurnStart(cancelItem: CosmereItem, actor: CosmereActor, turn: Combat.HistoryData){
-    for(const effectUuid of cancelItem.getFlag(MODULE_ID, "effectsUuids")){
+    for(const effectUuid of cancelItem.getFlag(MODULE_ID, "descendantUuids")){
         if(effectUuid.includes(actor.uuid)){
             selfGravitationTurnStart(cancelItem, actor, turn);
         }
@@ -165,7 +162,7 @@ async function selfGravitationTurnStart(cancelItem: CosmereItem, actor: CosmereA
 
 async function characterGravitationExpendInvestiture(item: CosmereItem, actor: CosmereActor, turn: Combat.HistoryData){
     //TODO: Check if this is a boss turn before decrementing remaining investiture
-    const effectsUUIDs = item.flags[MODULE_ID]?.effectsUuids
+    const effectsUUIDs = item.flags[MODULE_ID]?.descendantUuids
     for(const effectUUID of effectsUUIDs!){
         let effect = await fromUuid(effectUUID) as CosmereActiveEffect;
 
@@ -230,7 +227,7 @@ async function applyFriendlyGravitationInfusion(item: CosmereItem, actor: Cosmer
         var gravitationInfusionEffectCreateData = await getFriendlyGravitationEffectCreateData(actor, cancelGravitationCaster, infusedInvestiture);
 
         const gravitationInfusionEffect = await giveActorEffect(target.actor, gravitationInfusionEffectCreateData);
-        cancelGravitationCaster.setFlag(MODULE_ID, "effectsUuids", [gravitationInfusionEffect?.uuid!]);
+        cancelGravitationCaster.setFlag(MODULE_ID, "descendantUuids", [gravitationInfusionEffect?.uuid!]);
     }
 }
 
@@ -247,7 +244,7 @@ async function applySelfGravitationInfusion(item: CosmereItem, actor: CosmereAct
 
     if(cancelSelfGravitationCaster) {
         const gravitationInfusionEffect = await ActiveEffect.create(gravitationInfusionEffectCreateData, {parent: cancelSelfGravitationCaster});
-        cancelSelfGravitationCaster.setFlag(MODULE_ID, "effectsUuids", [gravitationInfusionEffect?.uuid!]);
+        cancelSelfGravitationCaster.setFlag(MODULE_ID, "descendantUuids", [gravitationInfusionEffect?.uuid!]);
 
     }
 }

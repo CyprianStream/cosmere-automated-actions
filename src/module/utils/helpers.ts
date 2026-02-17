@@ -1,4 +1,4 @@
-import { CosmereItem, CosmereActor, CosmereActiveEffect } from "@system/documents";
+import { CosmereItem, CosmereActor, CosmereActiveEffect, CosmereDocument } from "@system/documents";
 import { MODULE_ID } from "@module/constants";
 
 const DEBUG = true;
@@ -6,6 +6,7 @@ const DEBUG = true;
 const enum MODULE_QUERY {
     giveActorItemGM = `${MODULE_ID}.giveActorItemGM`,
     giveActorEffectGM = `${MODULE_ID}.giveActorEffectGM`,
+    deleteUuidGM = `${MODULE_ID}.deleteUuidGM`,
 }
 
 //Module Functions
@@ -20,6 +21,7 @@ export function nameToId(str: string) {
 export function registerQueries(){
     CONFIG.queries[MODULE_QUERY.giveActorEffectGM] = giveActorEffectGM;
     CONFIG.queries[MODULE_QUERY.giveActorItemGM] = giveActorItemGM;
+    CONFIG.queries[MODULE_QUERY.deleteUuidGM] = deleteUuidGM;
 }
 
 //Actor Functions
@@ -38,6 +40,22 @@ export async function activateAllItemEffects(item: CosmereItem){
 declare interface giveActorItemGMData {
     actorUUID: string,
     itemUUID: string
+}
+
+export async function deleteDescendantUuids(descendantUuids: string[]){
+    for(const uuid of descendantUuids){
+        const documentToDelete = await fromUuid(uuid) as CosmereDocument;
+        if(documentToDelete.canUserModify(game.user!, "delete")){
+            documentToDelete.delete();
+        }
+        else{
+            await game.users?.activeGM?.query(MODULE_QUERY.deleteUuidGM, uuid);
+        }
+    }
+}
+async function deleteUuidGM(uuid: string){
+    const documentToDelete = await fromUuid(uuid) as CosmereDocument;
+    documentToDelete.delete();
 }
 export async function giveActorItem(actor: CosmereActor, itemUUID: string): Promise<CosmereItem | undefined>{
     if(actor.canUserModify(game.user!, "update")){

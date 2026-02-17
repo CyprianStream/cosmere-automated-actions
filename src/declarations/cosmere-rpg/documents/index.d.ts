@@ -12,7 +12,7 @@ import type { CosmereCombatant } from './combatant';
 import type { CosmereChatMessage } from './chat-message';
 // import type { CosmereTokenDocument } from './token';
 import type { CosmereActiveEffect } from './active-effect';
-export type CosmereDocument = CosmereActor | CosmereItem | CosmereCombat | CosmereCombatant | CosmereChatMessage | CosmereTokenDocument | CosmereActiveEffect;
+export type CosmereDocument = CosmereActor | CosmereItem | CosmereCombat | CosmereCombatant | CosmereChatMessage | CosmereActiveEffect;
 declare module "@league-of-foundry-developers/foundry-vtt-types/configuration" {
     interface DocumentClassConfig {
         Actor: CosmereActor;

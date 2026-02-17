@@ -1,5 +1,5 @@
 export type MODULE_ITEM_FLAGS = {
     target: string;
     caster: string;
-    effectsUuids: string[];
+    descendantUuids: string[];
 }
