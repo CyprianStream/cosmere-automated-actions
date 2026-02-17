@@ -5,7 +5,7 @@ import { D20Roll } from "@system/dice";
 
 // Module Imports
 import { getModuleSetting, registerModuleSettings, SETTINGS } from "@module/utils/settings.js";
-import { nameToId, log } from "@module/utils/helpers.js";
+import { nameToId, log, registerQueries } from "@module/utils/helpers.js";
 import { applyRollConditions, decrementExhausted } from "@module/automations/conditions.js";
 import { COSMERE_AUTOMATED_ACTIONS } from "@module/config";
 import { macrosMap, startTurnItemMap, startTurnEffectMap, endTurnEffectMap, endTurnItemMap, invFromZeroMap, invToZeroMap } from "./module/macros/maps";
@@ -16,6 +16,7 @@ declare global{
     interface CONFIG {
         COSMERE: any;
         COSMERE_AUTOMATED_ACTIONS: typeof COSMERE_AUTOMATED_ACTIONS;
+        queries: any;
     }
 
     var cosmereAutomatedActions: {
@@ -38,6 +39,7 @@ Hooks.once('init', () => {
 
 	registerModuleSettings();
     registerAllMacros();
+    registerQueries();
 });
 
 //Automates item actions
@@ -187,7 +189,7 @@ Hooks.on('combatTurnChange', (
     if(!shouldCheckRoundChange(cosmereCombat, prior, current)){
         return;
     }
-
+    //TODO: This should also check for end-turn items maybe?
 });
 
 // Investiture change hooks

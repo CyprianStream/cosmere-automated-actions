@@ -1,5 +1,5 @@
 import { MODULE_ID, MODULE_NAME } from "@src/module/constants";
-import { giveActorItem } from "@src/module/utils/helpers";
+import { deleteDescendantUuids, giveActorItem } from "@src/module/utils/helpers";
 import { CosmereItem, CosmereActor, CosmereActiveEffect } from "@src/declarations/cosmere-rpg/documents";
 import { getInfusionInvestiture, getSurgeTalents, useCanceled } from "../helpers/surge-helpers";
 import { ABR } from "./talent-ids";
@@ -58,11 +58,7 @@ export async function abrasion(item: CosmereItem, actor: CosmereActor){
 
 export async function cancelSelfAbrasion(item: CosmereItem, actor: CosmereActor){
     //finds items from target and caster and deletes it
-    for(const effectUuid of item.getFlag(MODULE_ID, "effectsUuids")){
-        const effectToDelete = await fromUuid(effectUuid) as CosmereActiveEffect;
-        effectToDelete.delete();
-    }
-    actor.items.getName("Skate")?.delete();
+    deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
     item.delete();
 }
 
@@ -165,7 +161,7 @@ async function applySelfAbrasionInfusion(item: CosmereItem, actor: CosmereActor)
         abrasionInfusionEffectCreateData.origin = cancelSelfAbrasionCasterUUID;
 
         const abrasionInfusionEffect = await ActiveEffect.create(abrasionInfusionEffectCreateData, {parent: cancelSelfAbrasionCaster});
-        cancelSelfAbrasionCaster.setFlag(MODULE_ID, "effectsUuids", [abrasionInfusionEffect?.uuid!]);
+        cancelSelfAbrasionCaster.setFlag(MODULE_ID, "descendantUuids", [abrasionInfusionEffect?.uuid!, skate?.uuid!]);
     }
 }
 

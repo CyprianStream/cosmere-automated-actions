@@ -1,5 +1,5 @@
 import { CosmereActiveEffect, CosmereActor, CosmereItem } from "@system/documents";
-import { getFirstTarget, giveActorItem } from "../../../utils/helpers";
+import { deleteDescendantUuids, getFirstTarget, giveActorEffect, giveActorItem } from "../../../utils/helpers";
 import { MODULE_ID } from "@src/module/constants";
 import { expendInvestiture, getSurgeTalents, sizes, getInfusionInvestiture, useCanceled } from "../helpers/surge-helpers";
 import { PRG } from "./talent-ids";
@@ -25,10 +25,7 @@ export async function progression(item: CosmereItem, actor: CosmereActor){
 
 export async function cancelCharacterRegrowth(item: CosmereItem, actor: CosmereActor){
     //finds items from target and caster and deletes it
-    for(const effectUuid of item.getFlag(MODULE_ID, "effectsUuids")){
-        const effectToDelete = await fromUuid(effectUuid) as CosmereActiveEffect;
-        effectToDelete.delete();
-    }
+    deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
     item.delete();
 }
 //#endregion
@@ -76,7 +73,7 @@ export async function characterRegrowthEffectStartTurn(effect: CosmereActiveEffe
 
 export async function characterRegrowthExpendInvestiture(item: CosmereItem, actor: CosmereActor, turn: Combat.HistoryData){
     //TODO: Check if this is a boss turn before decrementing remaining investiture
-    const effectsUUIDs = item.flags[MODULE_ID]?.effectsUuids
+    const effectsUUIDs = item.flags[MODULE_ID]?.descendantUuids
     for(const effectUUID of effectsUUIDs!){
         let effect = await fromUuid(effectUUID) as CosmereActiveEffect;
         let hasExtendedRegrowth = false;
@@ -147,14 +144,17 @@ async function applyRegrowthInfusion(item: CosmereItem, actor: CosmereActor){
         useCanceled(item, actor);
         return;
     }
+    else if(!target.actor){
+        ui.notifications?.warn("Needs target with an actor");
+        useCanceled(item, actor);
+        return;
+    }
     let infusedInvestiture = await getInfusionInvestiture(item, actor);
 
     //Adds "Cancel Regrowth" item to caster
     const cancelRegrowthCasterUUID = "Compendium.cosmere-automated-actions.caaactions.Item.LNAzM5dFOJ4fqqdL";
     const cancelRegrowthCaster = await giveActorItem(actor, cancelRegrowthCasterUUID)
     if(cancelRegrowthCaster) {
-        cancelRegrowthCaster.setFlag(MODULE_ID, "target", target.actor?.uuid!);
-        cancelRegrowthCaster.setFlag(MODULE_ID, "caster", caster.uuid);
 
         //Adds "Regrowth Infusion" item to target
         const regrowthInfusionEffectCreateData: ActiveEffect.CreateData = {
@@ -186,8 +186,8 @@ async function applyRegrowthInfusion(item: CosmereItem, actor: CosmereActor){
                 }
             }
         };
-        const regrowthInfusionEffect = await ActiveEffect.create(regrowthInfusionEffectCreateData, {parent: target.actor});
-        cancelRegrowthCaster.setFlag(MODULE_ID, "effectsUuids", [regrowthInfusionEffect?.uuid!]);
+        const regrowthInfusionEffect = await giveActorEffect(target.actor, regrowthInfusionEffectCreateData);
+        cancelRegrowthCaster.setFlag(MODULE_ID, "descendantUuids", [regrowthInfusionEffect?.uuid!]);
     }
 }
 //#endregion
