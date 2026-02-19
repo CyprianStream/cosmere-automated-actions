@@ -4,7 +4,7 @@ import { D20Roll, D20RollOptions, D20RollData } from './d20-roll';
 import { DamageRoll, DamageRollOptions, DamageRollData } from './damage-roll';
 export * from './d20-roll';
 export * from './damage-roll';
-export * from './plot-die';
+// export * from './plot-die';
 export interface D20RollConfigration extends D20RollOptions {
     /**
      * The dice roll component parts, excluding the initial d20
@@ -50,5 +50,3 @@ export interface DamageRollConfiguration extends DamageRollOptions {
      */
     data: DamageRollData;
 }
-export declare function d20Roll(config: D20RollConfigration): Promise<D20Roll | null>;
-export declare function damageRoll(config: DamageRollConfiguration): Promise<DamageRoll>;

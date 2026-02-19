@@ -1,5 +1,5 @@
-import { MODULE_ID } from "@src/module/constants";
-import { CosmereItem, CosmereActor, CosmereActiveEffect } from "@src/declarations/cosmere-rpg/documents";
+import { MODULE_ID, SYSTEM_ID } from "@src/module/constants";
+import { CosmereItem, CosmereActor, CosmereActiveEffect, MESSAGE_TYPES } from "@src/declarations/cosmere-rpg/documents";
 
 export const SurgeScalingTable = [
     {
@@ -73,10 +73,12 @@ export async function expendInvestiture(effect: CosmereActiveEffect, round: numb
     }
 
     if(newInvRemaining == 0){
+        await expendInvestitureMessage(effect);
         return false;
     }
     else if(newInvRemaining != investitureRemaining){
         let nameString = effect.name.replace(`(${investitureRemaining} inv left)`, `(${newInvRemaining} inv left)`);
+        await expendInvestitureMessage(effect);
         await effect.update({
             name: nameString,
             flags:{
@@ -88,8 +90,49 @@ export async function expendInvestiture(effect: CosmereActiveEffect, round: numb
     }
     return true;
 }
+async function expendInvestitureMessage(effect: CosmereActiveEffect){
+
+    var actor: CosmereActor;
+    let origin = await fromUuid(effect.origin);
+    if(!origin){
+        actor = effect.parent as CosmereActor;
+    }
+    else if(origin instanceof (CONFIG.Actor.documentClass as any)){
+        actor = origin as CosmereActor;
+    }
+    else if(origin.parent instanceof (CONFIG.Actor.documentClass as any)){
+        actor = origin.parent as CosmereActor;
+    }
+    else{
+        // Could not find the actor who created this effect, something is wrong
+        return;
+    }
+    const messageConfig = {
+        user: game.user?.id,
+        speaker: ChatMessage.getSpeaker({ actor }),
+        rolls: [] as foundry.dice.Roll[],
+        flags: {} as Record<string, unknown>,
+    };
+    messageConfig.flags[SYSTEM_ID] = {
+        message: {
+            type: MESSAGE_TYPES.ACTION,
+            description: `<p>Expending investiture from ${effect.name} on ${effect.parent?.name}</p>`
+        }
+    }
+    await ChatMessage.create(messageConfig);
+}
 
 export function getSurgeTalents(actor: CosmereActor, surgePower: string): CosmereItem[]{
     //@ts-ignore
     return actor.talents.filter(i => i.system.power == surgePower);
+}
+
+export function getAbilityDescription(itemDescription: string, abilityString: string){
+    let paragraphs = itemDescription.split("</p>");
+    for(var paragraph of paragraphs){
+        if(paragraph.includes(abilityString)){
+            return (paragraph + "</p>");
+        }
+    }
+    return "";
 }
