@@ -1,8 +1,12 @@
-import { CosmereActiveEffect, CosmereActor, CosmereItem } from "@system/documents";
-import { deleteDescendantUuids, getFirstTarget, giveActorEffect, giveActorItem } from "../../../utils/helpers";
-import { MODULE_ID } from "@src/module/constants";
-import { expendInvestiture, getSurgeTalents, sizes, getInfusionInvestiture, useCanceled } from "../helpers/surge-helpers";
+import { CosmereActiveEffect, CosmereActor, CosmereItem, MESSAGE_TYPES } from "@system/documents";
+import { deleteDescendantUuids, getFirstTarget, giveActorEffect, giveActorItem, log } from "../../../utils/helpers";
+import { MODULE_ID, SYSTEM_ID } from "@src/module/constants";
+import { expendInvestiture, getSurgeTalents, sizes, getInfusionInvestiture, useCanceled, getAbilityDescription } from "../helpers/surge-helpers";
 import { PRG } from "./talent-ids";
+import { renderSystemTemplate, SYSTEM_TEMPLATES } from "@src/module/templates/system-templates";
+import { DamageRollConfiguration } from "@src/declarations/cosmere-rpg/dice";
+import { DamageType } from "@src/declarations/cosmere-rpg/types/cosmere";
+import { damageRoll } from "@src/module/system-clones/dice";
 
 //#region Macro Functions
 export async function progression(item: CosmereItem, actor: CosmereActor){
@@ -59,15 +63,39 @@ export async function characterRegrowthEffectStartTurn(effect: CosmereActiveEffe
         rollFormula += ` + ${casterActor.system.skills.prg.mod.value}`;
     }
     //TODO: Add effects from Swift Healer and Applied Medicine
+    const sectionHTML = await renderSystemTemplate(SYSTEM_TEMPLATES.CHAT_CARD_DESCRIPTION, {
+        title: effect.name,
+        img: effect.img,
+        description: effect.description,
+    });
+    const messageConfig = {
+        user: game.user?.id,
+        speaker: ChatMessage.getSpeaker({ actor: casterActor }),
+        rolls: [] as foundry.dice.Roll[],
+        flags: {} as Record<string, unknown>,
+    };
+
+    messageConfig.flags[SYSTEM_ID] = {
+        message: {
+            type: MESSAGE_TYPES.ACTION,
+            description: sectionHTML,
+        },
+    };
 
     const rollData = casterActor.getRollData();
-    let r = await new Roll(rollFormula, rollData).evaluate();
-    await r.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: casterActor }),
-        content: `${casterActor.name} heals ${targetActor.name}`,
-    })
+    const damageRollConfig: DamageRollConfiguration = {
+        formula: rollFormula,
+        data: rollData,
+        damageType: DamageType.Healing,
+        damageSourceName: effect.name,
+    }
+    let r = await damageRoll(damageRollConfig);
+    messageConfig.rolls.push(r as unknown as foundry.dice.Roll);
+    // await r.toMessage(messageConfig);
+    await ChatMessage.create(messageConfig);
+    targetActor.applyHealing(r.total!);
     const targetHealth = targetActor.system.resources.hea.value;
-    const newHealth = targetHealth + r.total;
+    const newHealth = targetHealth + r.total!;
     await targetActor.update({ 'system.resources.hea.value': newHealth } as any);
 }
 
@@ -155,10 +183,9 @@ async function applyRegrowthInfusion(item: CosmereItem, actor: CosmereActor){
     const cancelRegrowthCasterUUID = "Compendium.cosmere-automated-actions.caaactions.Item.LNAzM5dFOJ4fqqdL";
     const cancelRegrowthCaster = await giveActorItem(actor, cancelRegrowthCasterUUID)
     if(cancelRegrowthCaster) {
-
         //Adds "Regrowth Infusion" item to target
         const regrowthInfusionEffectCreateData: ActiveEffect.CreateData = {
-            name:`Regrowth Infusion (${infusedInvestiture} inv left)`,
+            name:`Character Regrowth (${infusedInvestiture} inv left)`,
             img: "icons/magic/life/cross-beam-green.webp",
             disabled: false,
             duration: {
@@ -176,7 +203,7 @@ async function applyRegrowthInfusion(item: CosmereItem, actor: CosmereActor){
                 "isStackable": false,
                 "stacks": null
             },
-            description: "Regrowth Infusion",
+            description: getAbilityDescription(item.system.description.value, "Character Regrowth"),
             origin: cancelRegrowthCaster.uuid,
             sort: 0,
             flags: {
