@@ -1,7 +1,7 @@
 import { CosmereItem, CosmereActor, CosmereActiveEffect } from "@system/documents";
 import { deleteDescendantUuids, getFirstTarget, giveActorEffect, giveActorItem, log } from "@module/utils/helpers";
 import { GRV } from "./talent-ids";
-import { getSurgeTalents, expendInvestiture, useCanceled, getInfusionInvestiture } from "../helpers/surge-helpers";
+import { getSurgeTalents, expendEffectInvestiture, useCanceled, getInfusionInvestiture } from "../helpers/surge-helpers";
 import { MODULE_ID } from "@src/module/constants";
 
 //#region Effect Create Data
@@ -166,7 +166,7 @@ async function characterGravitationExpendInvestiture(item: CosmereItem, actor: C
     for(const effectUUID of effectsUUIDs!){
         let effect = await fromUuid(effectUUID) as CosmereActiveEffect;
 
-        if(!await expendInvestiture(effect, turn.round!)){
+        if(!await expendEffectInvestiture(effect, turn.round!)){
             cancelGravitationInfusion(item, actor);
         }
     }

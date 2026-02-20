@@ -1,6 +1,4 @@
 import { CosmereItem, CosmereActor, CosmereActiveEffect } from "@system/documents";
-import { activateAllItemEffects } from "../../../utils/helpers";
-import { expendInvestiture } from "../helpers/surge-helpers";
 import { log } from "@module/utils/helpers.js";
 
 export async function enhance(item: CosmereItem, actor: CosmereActor) {

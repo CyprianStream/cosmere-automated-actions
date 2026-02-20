@@ -59,7 +59,7 @@ export async function getInfusionInvestiture(item: CosmereItem, actor: CosmereAc
 }
 
 //
-export async function expendInvestiture(effect: CosmereActiveEffect, round: number, skillRank: number = 1, extended?: boolean): Promise<boolean>{
+export async function expendEffectInvestiture(effect: CosmereActiveEffect, round: number, skillRank: number = 1, extended?: boolean): Promise<boolean>{
     let investitureRemaining = effect.getFlag(MODULE_ID, "infusion_inv_remaining");
     let newInvRemaining = investitureRemaining;
     if(extended){
@@ -73,12 +73,12 @@ export async function expendInvestiture(effect: CosmereActiveEffect, round: numb
     }
 
     if(newInvRemaining == 0){
-        await expendInvestitureMessage(effect);
+        await expendEffectInvestitureMessage(effect);
         return false;
     }
     else if(newInvRemaining != investitureRemaining){
         let nameString = effect.name.replace(`(${investitureRemaining} inv left)`, `(${newInvRemaining} inv left)`);
-        await expendInvestitureMessage(effect);
+        await expendEffectInvestitureMessage(effect);
         await effect.update({
             name: nameString,
             flags:{
@@ -90,7 +90,7 @@ export async function expendInvestiture(effect: CosmereActiveEffect, round: numb
     }
     return true;
 }
-async function expendInvestitureMessage(effect: CosmereActiveEffect){
+async function expendEffectInvestitureMessage(effect: CosmereActiveEffect){
 
     var actor: CosmereActor;
     let origin = await fromUuid(effect.origin);

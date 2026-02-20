@@ -1,7 +1,7 @@
 import { CosmereActiveEffect, CosmereActor, CosmereItem, MESSAGE_TYPES } from "@system/documents";
 import { deleteDescendantUuids, getFirstTarget, giveActorEffect, giveActorItem, log } from "../../../utils/helpers";
 import { MODULE_ID, SYSTEM_ID } from "@src/module/constants";
-import { expendInvestiture, getSurgeTalents, sizes, getInfusionInvestiture, useCanceled, getAbilityDescription } from "../helpers/surge-helpers";
+import { expendEffectInvestiture, getSurgeTalents, sizes, getInfusionInvestiture, useCanceled, getAbilityDescription } from "../helpers/surge-helpers";
 import { PRG } from "./talent-ids";
 import { renderSystemTemplate, SYSTEM_TEMPLATES } from "@src/module/templates/system-templates";
 import { DamageRollConfiguration } from "@src/declarations/cosmere-rpg/dice";
@@ -111,7 +111,7 @@ export async function characterRegrowthExpendInvestiture(item: CosmereItem, acto
                 hasExtendedRegrowth = true;
             }
         }
-        if(!await expendInvestiture(effect, turn.round!, actor.system.skills.prg.rank, hasExtendedRegrowth)){
+        if(!await expendEffectInvestiture(effect, turn.round!, actor.system.skills.prg.rank, hasExtendedRegrowth)){
             cancelCharacterRegrowth(item, actor);
         }
     }
