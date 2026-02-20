@@ -14,8 +14,14 @@ export function applyRollConditions(roll: D20Roll, actor: CosmereActor){
             case"condexhausted000":
                 //THIS WILL NEED TO BE UPDATED AFTER UPCOMING ROLL REFACTOR
                 //Applies exhausted modifier equal to each roll
+                let exhaustionStacks;
+                if(effect.system.stacks){
+                    exhaustionStacks = effect.system.stacks
+                } else {
+                    exhaustionStacks = 1
+                }
                 const newOperator = new foundry.dice.terms.OperatorTerm({operator: "-"});
-                const newTerm = new foundry.dice.terms.NumericTerm({number: effect.system.stacks as number});
+                const newTerm = new foundry.dice.terms.NumericTerm({number: exhaustionStacks as number});
                 roll.terms.push(newOperator, newTerm);
             break
             case"condafflicted000":
