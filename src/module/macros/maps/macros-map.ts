@@ -14,9 +14,7 @@ import { division } from "../surges/division/division.js"
 
 
 //Illumination actions
-import { illumination } from "../surges/illumination/illumination.js"
-import { dismissComplexIllusion } from "../surges/illumination/illumination.js"
-import { dismissDisguise } from "../surges/illumination/illumination.js"
+
 
 //Progression actions
 
@@ -68,9 +66,7 @@ export var macrosMap: Map<string, MacroFunc> = new Map<string, MacroFunc>([
 
 
 	//Illumination actions
-	["illumination", illumination as MacroFunc],
-	["dismiss-complex-illusion", dismissComplexIllusion as MacroFunc],
-	["dismiss-disguise", dismissDisguise as MacroFunc],
+
 
 	//Progression actions
 

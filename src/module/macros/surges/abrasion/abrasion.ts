@@ -61,6 +61,10 @@ export async function cancelSelfAbrasion(item: CosmereItem, actor: CosmereActor)
     deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
     item.delete();
 }
+//#endregion
+
+// START TURN EFFECTS
+//#region Start Turn Effects
 
 export async function selfAbrasionTurnStart(cancelItem: CosmereItem, actor: CosmereActor, turn: Combat.HistoryData){
     //TODO: Check if this is a boss turn before decrementing remaining investiture
