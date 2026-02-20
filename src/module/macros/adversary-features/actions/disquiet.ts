@@ -25,7 +25,7 @@ export async function disquiet(item: CosmereItem, actor: CosmereActor){
         }
     },
     {
-        label: "No (Remove 1 focus from target",
+        label: "No (Remove 1 focus from target)",
         action: "standard",
         default: true,
         callback: async () => {
