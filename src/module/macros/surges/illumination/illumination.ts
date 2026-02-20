@@ -51,12 +51,12 @@ export async function illumination(item: CosmereItem, actor: CosmereActor){
             {
                 label: "Complex Illusion",
                 action: "complex-illusion",
-                callback: async () => { createComplexIllusion(item, actor)}
+                callback: async () => { createComplexIllusion(item, actor) }
             },
             {
                 label: "Disguise Yourself",
                 action: "disguise-yourself",
-                callback: async () => { applySelfDisguise(item, actor)}
+                callback: async () => { applySelfDisguise(item, actor) }
             }
         ]
     })
@@ -97,6 +97,7 @@ export async function complexIllusionTurnStart(item: CosmereItem, actor: Cosmere
 // HELPERS
 //#region Helpers
 async function applySelfDisguise(item: CosmereItem, actor: CosmereActor){
+    //TODO: This should not spend investiture
     //adds "Dismiss Disguise" item to actor
     const dismissDisguiseUUID = "Compendium.cosmere-automated-actions.caaactions.Item.3SdIMgwufXgAfQmM";
     const dismissDisguise = await giveActorItem(actor, dismissDisguiseUUID);
