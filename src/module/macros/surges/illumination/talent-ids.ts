@@ -1,5 +1,5 @@
 export const ILL = {
-    ILLUMINATION: 'ill',
+    ILLUMINATION: 'illumination',
     CANCEL_COMPLEX_ILLUSION: 'cancel-complex-illusion',
     CANCEL_DISGUISE: 'cancel-disguise',
     // Items
