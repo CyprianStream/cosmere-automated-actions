@@ -3,6 +3,7 @@ import { deleteDescendantUuids, getFirstTarget, giveActorEffect, giveActorItem, 
 import { DVS } from "./talent-ids";
 import { getSurgeTalents, expendEffectInvestiture, useCanceled, getInfusionInvestiture } from "../helpers/surge-helpers";
 import { MODULE_ID, SYSTEM_ID } from "@module/constants";
+import { Attribute, DamageType } from "@src/declarations/cosmere-rpg/types/cosmere";
 
 //#region Effect Create Data
 //#endregion
@@ -44,20 +45,14 @@ export async function division(item: CosmereItem, actor: CosmereActor){
 // HELPERS
 //#region Helpers
 async function useDivisionAttack(item: CosmereItem, actor: CosmereActor){
-    const target = getFirstTarget();
     //If attacking character, makes attack roll and post it to chat
-    const currentInv = actor.system.resources.inv.value;
-    if(!target){
-        ui.notifications?.warn("Needs target");
-        useCanceled(item, actor);
-        return;
-    };
-    //makes attack roll
     if(!item.system.damage.formula){
         item.system.damage.formula = "3@scalar.power.dvs.die";
+        item.system.damage.type = DamageType.Spirit;
     };
-    const rollOptions = {
+    const rollOptions: CosmereItem.RollAttackOptions = {
         skillTest: {
+            attribute: Attribute.Intellect,
             skill: "dvs",
         },
         chatMessage: false,
@@ -84,6 +79,8 @@ async function useDivisionAttack(item: CosmereItem, actor: CosmereActor){
         },
     };
     await ChatMessage.create(messageConfig);
+    item.system.damage.formula = "";
+    item.system.damage.type = "";
 }
 
 async function useDivisionArea(item: CosmereItem, actor: CosmereActor){
