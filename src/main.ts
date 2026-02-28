@@ -88,6 +88,49 @@ Hooks.on(HOOKS.REST, (actor, length) => {
 	};
 });
 
+function shouldCheckTurnEnd(cosmereCombat: CosmereCombat, prior: Combat.HistoryData, current: Combat.HistoryData){
+    return (getModuleSetting(SETTINGS.USE_AUTOMATIONS) && prior.turn != null && prior.turn != -1 && game.user?.isActiveGM)
+}
+//Turn end hooks
+Hooks.on('combatTurnChange', (
+    cosmereCombat,
+    prior,
+    current
+) => {
+    if(!shouldCheckTurnEnd(cosmereCombat, prior, current)){
+        return;
+    }
+    //loops through combatants checking each item for end-turn behavior
+    //Checking items
+    let combatant = cosmereCombat.turns[prior.turn!];
+    log(`Checking ${combatant.name} for end-turn items`);
+    combatant.actor.items.forEach((item)=>{
+        var itemId = item.system.id;
+	    if(!endTurnItemMap.has(itemId)){itemId = nameToId(item.name)};
+        const endTurnItemFunc = endTurnItemMap.get(itemId);
+        if(endTurnItemFunc){
+            log(`Calling end turn func for ${itemId}`)
+            endTurnItemFunc(item, combatant.actor, prior);
+        };
+    });
+
+    //Checking activeEffects
+    log(`Checking ${combatant.name} for end-turn effects`);
+    log(combatant.actor);
+    combatant.actor.effects.forEach((effect)=>{
+        if(!effect.flags[MODULE_ID]){
+            return;
+        }
+        var effectId = effect.flags[MODULE_ID]?.end_turn_id!;
+	    if(!endTurnEffectMap.has(effectId)){effectId = nameToId(effect.name)};
+        const endTurnEffectFunc = endTurnEffectMap.get(effectId);
+        if(endTurnEffectFunc){
+            log(`Calling end turn func for ${effectId}`)
+            endTurnEffectFunc(effect, prior);
+        };
+    });
+});
+
 function shouldCheckTurnStart(cosmereCombat: CosmereCombat, prior: Combat.HistoryData, current: Combat.HistoryData){
     // TODO: Performance improvements by creating a new boolean flag on actor, which updates to "true" when we add a thing which needs checking every turn,
     // and resets to false when we check a turn start and don't do anything. We need a different flag per turn event category, and to change the
@@ -130,51 +173,6 @@ Hooks.on('combatTurnChange', (
             startTurnEffectFunc(effect, current);
         };
     });
-});
-
-function shouldCheckTurnEnd(cosmereCombat: CosmereCombat, prior: Combat.HistoryData, current: Combat.HistoryData){
-    return (getModuleSetting(SETTINGS.USE_AUTOMATIONS) && prior.turn != null && game.user?.isActiveGM)
-}
-//Turn end hooks
-Hooks.on('combatTurnChange', (
-    cosmereCombat,
-    prior,
-    current
-) => {
-    if(!shouldCheckTurnEnd(cosmereCombat, prior, current)){
-        return;
-    }
-    //loops through combatants checking each item for end-turn behavior
-    //Checking items
-    let combatant = cosmereCombat.turns[prior.turn!];
-    log(`Checking ${combatant.name} for end-turn items`);
-    combatant.actor.items.forEach((item)=>{
-        var itemId = item.system.id;
-	    if(!endTurnItemMap.has(itemId)){itemId = nameToId(item.name)};
-        const endTurnItemFunc = endTurnItemMap.get(itemId);
-        if(endTurnItemFunc){
-            log(`Calling end turn func for ${itemId}`)
-            endTurnItemFunc(item, combatant.actor, prior);
-        };
-    });
-
-    //Checking activeEffects
-    log(`Checking ${combatant.name} for end-turn effects`);
-    log(combatant.actor);
-    combatant.actor.effects.forEach((effect)=>{
-        if(!effect.flags[MODULE_ID]){
-            return;
-        }
-        var effectId = effect.flags[MODULE_ID]?.end_turn_id!;
-	    if(!endTurnEffectMap.has(effectId)){effectId = nameToId(effect.name)};
-        const endTurnEffectFunc = endTurnEffectMap.get(effectId);
-        if(endTurnEffectFunc){
-            log(`Calling end turn func for ${effectId}`)
-            endTurnEffectFunc(effect, prior);
-        };
-    });
-
-
 });
 
 function shouldCheckRoundChange(cosmereCombat: CosmereCombat, prior: Combat.HistoryData, current: Combat.HistoryData){
