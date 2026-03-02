@@ -100,16 +100,24 @@ export class RecoverPrompt extends foundry.applications.api.HandlebarsApplicatio
         this: RecoverPrompt,
         event: Event
     ){
-
-
+        event.preventDefault();
+        const resourceId = $(event.target!).closest('[data-id]').data('id') as Resource;
+        if(!resourceId) return;
+        this.gained[resourceId] += 1;
+        this.pointsRemaining -= 1;
+        this.render();
     }
 
     protected static _onDecreaseGain(
         this: RecoverPrompt,
         event: Event
     ){
-
-
+        event.preventDefault();
+        const resourceId = $(event.target!).closest('[data-id]').data('id') as Resource;
+        if(!resourceId) return;
+        this.gained[resourceId] -= 1;
+        this.pointsRemaining += 1;
+        this.render();
     }
 
     protected static async _onSubmit(

@@ -29,7 +29,7 @@ export const preloadHandlebarsTemplates = async function () {
 Handlebars.registerHelper('recoverResourceContext', (root: any, resourceId: Resource) => {
     let actor: CosmereActor = root.actor;
     let gained: Record<Resource, number> = root.gained;
-
+    let resourceGained = gained[resourceId];
     // Get resource
     const resource = actor.system.resources[resourceId];
 
@@ -46,7 +46,7 @@ Handlebars.registerHelper('recoverResourceContext', (root: any, resourceId: Reso
             value: value,
             max: max,
         },
-        gained: gained,
+        gained: resourceGained,
         pointsRemaining: root.pointsRemaining
     }
 });

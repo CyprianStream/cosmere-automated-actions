@@ -18,8 +18,8 @@
         </div>
     </div>
     <div class="btn-group flexrow">
-        <button class="decrease {{#if (eq gained 0)}}disabled{{/if}}" data-action="decrease-attribute">-</button>
-        <button class="increase {{#if (eq pointsRemaining 0)}}disabled{{/if}}" data-action="increase-attribute">+</button>
+        <button class="decrease {{#if (eq gained 0)}}disabled{{/if}}" data-action="decreaseGain">-</button>
+        <button class="increase {{#if (eq pointsRemaining 0)}}disabled{{/if}}" data-action="increaseGain">+</button>
     </div>
 </div>
 </app-actor-resource>
