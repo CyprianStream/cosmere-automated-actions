@@ -1,3 +1,4 @@
+// import './style.scss';
 // System Imports
 import { HOOKS } from "@system/constants/hooks.js";
 import { CosmereItem, CosmereActor, CosmereCombat } from "@system/documents";
@@ -11,6 +12,7 @@ import { COSMERE_AUTOMATED_ACTIONS } from "@module/config";
 import { macrosMap, startTurnItemMap, startTurnEffectMap, endTurnEffectMap, endTurnItemMap, invFromZeroMap, invToZeroMap } from "./module/macros/maps";
 import { MODULE_ID } from "./module/constants";
 import { registerAllMacros } from "./module/macros/registration-helpers";
+import { preloadHandlebarsTemplates } from "@module/utils/templates";
 
 declare global{
     interface CONFIG {
@@ -39,6 +41,7 @@ Hooks.once('init', () => {
 	registerModuleSettings();
     registerAllMacros();
     registerQueries();
+    preloadHandlebarsTemplates();
 });
 
 //Automates item actions

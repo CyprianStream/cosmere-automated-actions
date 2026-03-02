@@ -1,0 +1,11 @@
+<div>
+    <form class="recover-form">
+        <flexcol>
+        {{#each resourcesToChooseFrom as |resourceId|}}
+        {{> recover-resource (recoverResourceContext @root resourceId)}}
+        {{/each}}
+        </flexcol>
+    </form>
+</div>
+
+
