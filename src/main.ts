@@ -16,7 +16,6 @@ declare global{
     interface CONFIG {
         COSMERE: any;
         COSMERE_AUTOMATED_ACTIONS: typeof COSMERE_AUTOMATED_ACTIONS;
-        queries: any;
     }
 
     var cosmereAutomatedActions: {
@@ -48,7 +47,7 @@ Hooks.on(HOOKS.USE_ITEM, (item, _options) => {
 		return;
 	};
     //Gets item ID, checks if item has an associated macro, and then calls it
-    const actor = item.actor;
+    const actor = _options.actor;
     var itemId = item.system.id;
     log("Checking item usage: ");
     log(item);

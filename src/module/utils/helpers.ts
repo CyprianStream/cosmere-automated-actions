@@ -19,9 +19,12 @@ export function nameToId(str: string) {
 }
 
 export function registerQueries(){
-    CONFIG.queries[MODULE_QUERY.giveActorEffectGM] = giveActorEffectGM;
-    CONFIG.queries[MODULE_QUERY.giveActorItemGM] = giveActorItemGM;
-    CONFIG.queries[MODULE_QUERY.deleteUuidGM] = deleteUuidGM;
+    let newQueries = {
+        [MODULE_QUERY.giveActorEffectGM]: giveActorEffectGM,
+        [MODULE_QUERY.giveActorItemGM]: giveActorItemGM,
+        [MODULE_QUERY.deleteUuidGM]: deleteUuidGM,
+    }
+    foundry.utils.mergeObject(CONFIG.queries, newQueries);
 }
 
 //Actor Functions
@@ -49,6 +52,7 @@ export async function deleteDescendantUuids(descendantUuids: string[]){
             documentToDelete.delete();
         }
         else{
+            //@ts-ignore
             await game.users?.activeGM?.query(MODULE_QUERY.deleteUuidGM, uuid);
         }
     }
@@ -72,7 +76,8 @@ export async function giveActorItem(actor: CosmereActor, itemUUID: string): Prom
             actorUUID: actor.uuid,
             itemUUID: itemUUID
         }
-        const createdItemUUID = await game.users?.activeGM?.query(MODULE_QUERY.giveActorEffectGM, data);
+        //@ts-ignore
+        const createdItemUUID = await game.users?.activeGM?.query(MODULE_QUERY.giveActorEffectGM, data) as string;
         const item = await fromUuid(createdItemUUID) as CosmereItem | undefined;
         if(item){
             return item;
@@ -105,7 +110,8 @@ export async function giveActorEffect(parent: CosmereActor | CosmereItem, effect
             parentUUID: parent.uuid,
             effectData: effectCreateData
         }
-        let createdEffectUUID = await game.users?.activeGM?.query(MODULE_QUERY.giveActorEffectGM, data);
+        //@ts-ignore
+        let createdEffectUUID = await game.users?.activeGM?.query(MODULE_QUERY.giveActorEffectGM, data) as string;
         const effect = await fromUuid(createdEffectUUID);
         return effect;
     }
