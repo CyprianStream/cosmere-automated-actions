@@ -52,7 +52,6 @@ export async function deleteDescendantUuids(descendantUuids: string[]){
             documentToDelete.delete();
         }
         else{
-            //@ts-ignore
             await game.users?.activeGM?.query(MODULE_QUERY.deleteUuidGM, uuid);
         }
     }
@@ -76,8 +75,7 @@ export async function giveActorItem(actor: CosmereActor, itemUUID: string): Prom
             actorUUID: actor.uuid,
             itemUUID: itemUUID
         }
-        //@ts-ignore
-        const createdItemUUID = await game.users?.activeGM?.query(MODULE_QUERY.giveActorEffectGM, data) as string;
+        const createdItemUUID = await game.users?.activeGM?.query(MODULE_QUERY.giveActorItemGM, data) as string;
         const item = await fromUuid(createdItemUUID) as CosmereItem | undefined;
         if(item){
             return item;
@@ -110,7 +108,6 @@ export async function giveActorEffect(parent: CosmereActor | CosmereItem, effect
             parentUUID: parent.uuid,
             effectData: effectCreateData
         }
-        //@ts-ignore
         let createdEffectUUID = await game.users?.activeGM?.query(MODULE_QUERY.giveActorEffectGM, data) as string;
         const effect = await fromUuid(createdEffectUUID);
         return effect;
@@ -146,4 +143,14 @@ export function log(message: any, ...optionalParams: any[]){
 
 export function promptGMForUpdate(){
 
+}
+
+declare module "@league-of-foundry-developers/foundry-vtt-types/configuration" {
+    namespace CONFIG {
+        interface Queries {
+            [MODULE_QUERY.deleteUuidGM]: (data: string) => Promise<void>,
+            [MODULE_QUERY.giveActorEffectGM]: (data: giveActorEffectGMData) => Promise<string | void>,
+            [MODULE_QUERY.giveActorItemGM]: (data: giveActorItemGMData) => Promise<string | void>,
+        }
+    }
 }
