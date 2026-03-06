@@ -50,34 +50,8 @@ export default CLIArgs => {
                     { src: 'src/release-notes.md', dest: 'build/' },
                     { src: 'src/patch-notes.md', dest: 'build/' },
                 ],
-            }),
+            })
 
-            {
-                name: 'release-module-json-modifier',
-                writeBundle: async function (outputOptions, bundle) {
-                    if (!isRelease) return;
-
-                    // Path to the output module.json
-                    const moduleJsonPath = path.join(outputOptions.dir, 'module.json');
-
-                    try {
-                        // Read the current module.json
-                        const moduleJson = JSON.parse(await fs.promises.readFile(moduleJsonPath, 'utf8'));
-
-                        // Set the 'protected' property to true for release builds
-                        moduleJson.protected = true;
-
-                        // Write the modified module.json back
-                        await fs.promises.writeFile(
-                            moduleJsonPath,
-                            JSON.stringify(moduleJson, null, 2),
-                            'utf8'
-                        );
-                    } catch (error) {
-                        console.error('Error modifying module.json:', error);
-                    }
-                }
-            }
         ],
         onwarn: (warning, warn) => {
             if (warning.code === 'UNKNOWN_OPTION') {

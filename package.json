@@ -7,7 +7,7 @@
         "build": "npx rollup -c",
         "build:watch": "npx rollup -c -w",
         "build:pack": "npm run build && npm run pack",
-        "build:release": "npm run build -- --release && npm run pack && npm run zip",
+        "build:release": "npm run build && npm run pack && npm run zip",
         "lint": "eslint",
         "lint:fix": "eslint --fix",
         "link": "node ./scripts/link-foundry",
