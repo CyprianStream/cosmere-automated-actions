@@ -13,6 +13,7 @@ import { macrosMap, startTurnItemMap, startTurnEffectMap, endTurnEffectMap, endT
 import { MODULE_ID } from "./module/constants";
 import { registerAllMacros } from "./module/macros/registration-helpers";
 import { preloadHandlebarsTemplates } from "@module/utils/templates";
+import { registerWelcomeMessage } from "@module/hooks/welcome";
 
 declare global{
     interface CONFIG {
@@ -42,6 +43,7 @@ Hooks.once('init', () => {
     registerAllMacros();
     registerQueries();
     preloadHandlebarsTemplates();
+    registerWelcomeMessage();
 });
 
 //Automates item actions

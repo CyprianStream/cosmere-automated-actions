@@ -1,6 +1,7 @@
 import { MODULE_ID } from "../constants"
 
 export const SETTINGS = {
+    INTERNAL_LATEST_VERSION: 'latestVersion',
 	USE_AUTOMATIONS: 'useAutomations',
     SPHERE_DUNNING: 'sphereDunning',
     AUTOMATE_CONDITIONS: 'automateConditions',
@@ -8,6 +9,8 @@ export const SETTINGS = {
 } as const;
 
 type ModuleSettingsConfig = {
+    [key in `${typeof MODULE_ID}.${typeof SETTINGS.INTERNAL_LATEST_VERSION}`]: string;
+} & {
     [key in `${typeof MODULE_ID}.${typeof SETTINGS.USE_AUTOMATIONS}`]: boolean;
 } & {
     [key in `${typeof MODULE_ID}.${typeof SETTINGS.SPHERE_DUNNING}`]: boolean;
@@ -32,6 +35,15 @@ export function setModuleSetting<
 }
 
 export function registerModuleSettings(){
+
+    game.settings?.register(MODULE_ID, SETTINGS.INTERNAL_LATEST_VERSION, {
+        name: 'Latest Version',
+        scope: 'world',
+        config: false,
+        default: '0.0.0',
+        type: String,
+    });
+
     const toggleOptions = [
         {
             name: "Use Automations",
