@@ -46,6 +46,7 @@ Handlebars.registerHelper('recoverResourceContext', (root: any, resourceId: Reso
             value: value,
             max: max,
         },
+        increaseDisabled: (root.pointsRemaining == 0 || value == max),
         gained: resourceGained,
         pointsRemaining: root.pointsRemaining
     }
