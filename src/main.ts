@@ -91,7 +91,7 @@ Hooks.on(HOOKS.REST, (actor, length) => {
 });
 
 function shouldCheckTurnEnd(cosmereCombat: CosmereCombat, prior: Combat.HistoryData, current: Combat.HistoryData){
-    return (getModuleSetting(SETTINGS.USE_AUTOMATIONS) && prior.turn != null && prior.turn != -1 && game.user?.isActiveGM)
+    return (getModuleSetting(SETTINGS.USE_AUTOMATIONS) && prior.combatantId && game.user?.isActiveGM)
 }
 //Turn end hooks
 Hooks.on('combatTurnChange', (
@@ -137,7 +137,7 @@ function shouldCheckTurnStart(cosmereCombat: CosmereCombat, prior: Combat.Histor
     // TODO: Performance improvements by creating a new boolean flag on actor, which updates to "true" when we add a thing which needs checking every turn,
     // and resets to false when we check a turn start and don't do anything. We need a different flag per turn event category, and to change the
     // startTurnItemFunc return type
-    return (getModuleSetting(SETTINGS.USE_AUTOMATIONS) && current.turn != null && game.user?.isActiveGM)
+    return (getModuleSetting(SETTINGS.USE_AUTOMATIONS) && current.combatantId && game.user?.isActiveGM)
 }
 //Turn start hooks
 Hooks.on('combatTurnChange', (

@@ -10,6 +10,11 @@
             "name": "Cyprian",
             "url": "https://github.com/CyprianStream",
             "discord": "cyprian_edits"
+        },
+        {
+            "name": "posadist-revolution",
+            "url": "https://github.com/posadist-revolution",
+            "discord": "posadistrevolution"
         }
     ],
     "url": "https://github.com/CyprianStream/cosmere-automated-actions/",
@@ -56,13 +61,24 @@
                 "compatibility": {}
             }
         ],
+        "requires": [
+            {
+                "id": "cosmere-advanced-encounters",
+                "type": "module",
+                "manifest": "https://raw.githubusercontent.com/posadist-revolution/cosmere-advanced-encounters/refs/heads/main/src/module.json",
+                "compatibility": {
+                    "minimum": "1.2.2",
+                    "verified": "1.2.2"
+                }
+            }
+        ],
         "systems": [
             {
                 "id": "cosmere-rpg",
                 "type": "system",
                 "compatibility": {
-                    "minimum": "1",
-                    "verified": "2.0.0"
+                    "minimum": "2.0.5",
+                    "verified": "2.0.5"
                 }
             }
         ]
