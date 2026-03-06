@@ -1,0 +1,36 @@
+name: publish
+run-name: Publish release to Foundry
+on:
+  workflow_dispatch:
+    secrets:
+      FOUNDRY_PACKAGE_API_TOKEN:
+        description: "Secret token for Foundry API"
+        required: true
+    inputs:
+      dry-run:
+        description: "Whether this release attempt will be a dry run or not"
+        required: true
+        type: boolean
+      release-version:
+        description: "Release version to push to Foundry"
+        required: true
+        type: string
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Publish FoundryVTT Package
+      uses: cs96and/FoundryVTT-release-package@v1.0.3
+      with:
+        # The secret token of your package for the FoundryVTT Package Release API.
+        package-token: ${{ secrets.FOUNDRY_PACKAGE_API_TOKEN }}
+        # The URL of the JSON manifest of your package.
+        manifest-url: https://github.com/CyprianStream/cosmere-automated-actions/releases/download/${{ inputs.release-version }}/module.json
+        # The version of the release.  Leave undefined to use the `version` entry from your manifest file.
+        version: # optional
+        # The URL of the release notes for this release of your package.  Leave undefined to use the `changelog` entry from your manifest file.
+        notes-url: # optional
+        # Set to any value apart from `false` or `0` to do a dry-run.  Leave undefined or set to `false` or `0` for a proper release.
+        dry-run: ${{ inputs.dry-run }}
+
