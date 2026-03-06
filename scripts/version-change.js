@@ -27,6 +27,6 @@ fs.writeFileSync(packageLockJsonPath, JSON.stringify(packageLockJson, undefined,
 
 let moduleJson = JSON.parse(fs.readFileSync(moduleJsonPath, "utf8"));
 moduleJson.version = version;
-let moduleDownloadLink = `https://github.com/CyprianStream/cosmere-automated-actions/releases/download/release-${version}/cosmere-advanced-encounters-release-${version}.zip`
+let moduleDownloadLink = `https://github.com/CyprianStream/cosmere-automated-actions/releases/download/release-${version}/cosmere-automated-actions-release-${version}.zip`
 moduleJson.download = moduleDownloadLink;
-fs.writeFileSync(moduleJsonPath, JSON.stringify(moduleJson, undefined, "  "));
+fs.writeFileSync(moduleJsonPath, JSON.stringify(moduleJson, undefined, "    "));
