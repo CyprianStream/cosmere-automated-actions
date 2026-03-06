@@ -1,0 +1,16 @@
+<div>
+    <form class="recover-form">
+        {{!-- TODO: Add "Points Remaining" display --}}
+        <flexcol>
+            <flexrow>
+                Points Remaining: <b>{{pointsRemaining}}/{{pointsGained}}</b>
+            </flexrow>
+        {{#each resourcesToChooseFrom as |resourceId|}}
+        {{> recover-resource (recoverResourceContext @root resourceId)}}
+        {{/each}}
+        <button class="submit {{#if (gt pointsRemaining 0)}}disabled{{/if}}" data-action="submit">Submit</button>
+        </flexcol>
+    </form>
+</div>
+
+

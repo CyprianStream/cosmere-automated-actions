@@ -3,7 +3,7 @@ import { deleteDescendantUuids, getFirstTarget, giveActorEffect, giveActorItem, 
 import { MODULE_ID, SYSTEM_ID } from "@src/module/constants";
 import { expendEffectInvestiture, getSurgeTalents, sizes, getInfusionInvestiture, useCanceled, getAbilityDescription } from "../helpers/surge-helpers";
 import { PRG } from "./talent-ids";
-import { renderSystemTemplate, SYSTEM_TEMPLATES } from "@src/module/templates/system-templates";
+import { renderSystemTemplate, SYSTEM_TEMPLATES } from "@src/module/utils/system-templates";
 import { DamageRollConfiguration } from "@src/declarations/cosmere-rpg/dice";
 import { DamageType } from "@src/declarations/cosmere-rpg/types/cosmere";
 import { damageRoll } from "@src/module/system-clones/dice";

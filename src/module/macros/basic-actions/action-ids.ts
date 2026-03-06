@@ -1,0 +1,20 @@
+export const BASIC = {
+    UNARMED_STRIKE: "unarmed",
+    AID: "aid",
+    AVOID_DANGER: "avoid_danger",
+    BANTER: "banter",
+    DISENGAGE: "disengage",
+    DODGE: "dodge",
+    BRACE: "brace",
+    GAIN_ADVANTAGE: "gain_advantage",
+    DROP: "drop",
+    GRAPPLE: "grapple",
+    INTERACT: "interact",
+    MOVE: "move",
+    REACTIVE_STRIKE: "reactive_strike",
+    READY: "ready",
+    RECOVER: "recover",
+    SHOVE: "shove",
+    STRIKE: "strike",
+    USE_A_SKILL: "use_a_skill"
+}

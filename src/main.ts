@@ -1,3 +1,4 @@
+// import './style.scss';
 // System Imports
 import { HOOKS } from "@system/constants/hooks.js";
 import { CosmereItem, CosmereActor, CosmereCombat } from "@system/documents";
@@ -11,12 +12,12 @@ import { COSMERE_AUTOMATED_ACTIONS } from "@module/config";
 import { macrosMap, startTurnItemMap, startTurnEffectMap, endTurnEffectMap, endTurnItemMap, invFromZeroMap, invToZeroMap } from "./module/macros/maps";
 import { MODULE_ID } from "./module/constants";
 import { registerAllMacros } from "./module/macros/registration-helpers";
+import { preloadHandlebarsTemplates } from "@module/utils/templates";
 
 declare global{
     interface CONFIG {
         COSMERE: any;
         COSMERE_AUTOMATED_ACTIONS: typeof COSMERE_AUTOMATED_ACTIONS;
-        queries: any;
     }
 
     var cosmereAutomatedActions: {
@@ -40,6 +41,7 @@ Hooks.once('init', () => {
 	registerModuleSettings();
     registerAllMacros();
     registerQueries();
+    preloadHandlebarsTemplates();
 });
 
 //Automates item actions
@@ -48,7 +50,7 @@ Hooks.on(HOOKS.USE_ITEM, (item, _options) => {
 		return;
 	};
     //Gets item ID, checks if item has an associated macro, and then calls it
-    const actor = item.actor;
+    const actor = _options.actor;
     var itemId = item.system.id;
     log("Checking item usage: ");
     log(item);
