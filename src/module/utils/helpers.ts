@@ -1,7 +1,7 @@
 import { CosmereItem, CosmereActor, CosmereActiveEffect, CosmereDocument } from "@system/documents";
 import { MODULE_ID } from "@module/constants";
 
-const DEBUG = true;
+const DEBUG = false;
 
 const enum MODULE_QUERY {
     giveActorItemGM = `${MODULE_ID}.giveActorItemGM`,
