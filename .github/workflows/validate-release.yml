@@ -4,7 +4,7 @@ description: Validate the contents of the manifest and package.json for release 
 on:
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   validate:

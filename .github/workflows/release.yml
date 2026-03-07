@@ -1,13 +1,13 @@
 name: release
 run-name: Tag, Build, and Create Release
 description: |
-  Tags the release commit when a release PR is merged into main,
+  Tags the release commit when a release PR is merged into master,
   builds the release artifacts, and creates a release.
 on:
   pull_request:
     types: [closed]
     branches:
-      - main
+      - master
 
 jobs:
   tag-build-release:
