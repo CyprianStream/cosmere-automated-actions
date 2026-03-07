@@ -1,6 +1,13 @@
 # Release 1.3.0
 <sup>2026-03-07</sup>
 
+## Important note
+### A lot has changed about Cosmere Automated Actions with this release. The most important things for users/GMs to know are:
+### - Several effects (like Regrowth infusions or Enhance spending investiture) now happen when a turn starts or ends
+### - There is now a temporary dependency on the Cosmere Advanced Encounters module, to give us an indication of when to run automations which happen on the start or end of turns
+### - To start an actor's turn, you can use the "Mark as Active" button (which looks like an hourglass) in the combat tracker
+### - An actor's turn will end whenever either the player selects the "End turn" button in the combat tracker, or whenever another actor's turn starts
+
 ## Features
 - A major refactor has been done under the hood! Details:
     - Moved CAA to typescript, allowing better bug checking in code, as well as many other improvements which should enable increased development speed in the future
