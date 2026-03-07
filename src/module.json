@@ -2,7 +2,7 @@
     "id": "cosmere-automated-actions",
     "title": "Cosmere Automated Actions",
     "description": "A Module to add automations for some of cosmere's more manual actions",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "library": "false",
     "manifestPlusVersion": "1.2.0",
     "authors": [
@@ -10,11 +10,16 @@
             "name": "Cyprian",
             "url": "https://github.com/CyprianStream",
             "discord": "cyprian_edits"
+        },
+        {
+            "name": "posadist-revolution",
+            "url": "https://github.com/posadist-revolution",
+            "discord": "posadistrevolution"
         }
     ],
     "url": "https://github.com/CyprianStream/cosmere-automated-actions/",
     "manifest": "https://raw.githubusercontent.com/CyprianStream/cosmere-automated-actions/refs/heads/master/src/module.json",
-    "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/v1.2.1/module.zip",
+    "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/release-1.3.0/cosmere-automated-actions-release-1.3.0.zip",
     "compatibility": {
         "minimum": "13",
         "verified": "13",
@@ -56,13 +61,24 @@
                 "compatibility": {}
             }
         ],
+        "requires": [
+            {
+                "id": "cosmere-advanced-encounters",
+                "type": "module",
+                "manifest": "https://raw.githubusercontent.com/posadist-revolution/cosmere-advanced-encounters/refs/heads/main/src/module.json",
+                "compatibility": {
+                    "minimum": "1.2.2",
+                    "verified": "1.2.2"
+                }
+            }
+        ],
         "systems": [
             {
                 "id": "cosmere-rpg",
                 "type": "system",
                 "compatibility": {
-                    "minimum": "1",
-                    "verified": "2.0.0"
+                    "minimum": "2.0.5",
+                    "verified": "2.0.5"
                 }
             }
         ]

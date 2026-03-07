@@ -1,0 +1,45 @@
+{
+    "folder": "6t3xjoGaMnufAVPf",
+    "name": "Dismiss Lashing",
+    "type": "power",
+    "_id": "TcddNgIyb1GGZGXn",
+    "img": "icons/magic/earth/projectile-stone-ball-blue.webp",
+    "system": {
+        "id": "cancel-gravitation-infusion",
+        "type": "surge",
+        "activation": {
+            "type": "none",
+            "cost": {
+                "value": null,
+                "type": null
+            },
+            "consume": [],
+            "flavor": "",
+            "attribute": "default",
+            "plotDie": false,
+            "opportunity": null,
+            "complication": null,
+            "uses": null
+        },
+        "damage": {
+            "formula": null,
+            "type": null
+        },
+        "description": {
+            "value": "<p>Dismiss your current lashing</p>",
+            "chat": "",
+            "short": ""
+        },
+        "events": {},
+        "relationships": {},
+        "customSkill": false,
+        "skill": null
+    },
+    "effects": [],
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {},
+    "_key": "!items!TcddNgIyb1GGZGXn"
+}

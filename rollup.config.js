@@ -2,6 +2,9 @@
 import path from 'path';
 import fs from 'fs';
 
+import { marked } from 'marked';
+
+import typescript from '@rollup/plugin-typescript';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import copy from 'rollup-plugin-copy';
 import commonjs from '@rollup/plugin-commonjs';
@@ -11,7 +14,7 @@ export default CLIArgs => {
     const isRelease = CLIArgs.release || false;
 
     return {
-        input: './src/main.js',
+        input: './src/main.ts',
         output: {
             dir: 'build',
             format: 'es',
@@ -25,6 +28,7 @@ export default CLIArgs => {
 
             // Typescript
             nodeResolve({ preferBuiltins: true }),
+            typescript(),
             commonjs(),
 
             // Copy module.json & templates
@@ -40,32 +44,14 @@ export default CLIArgs => {
                 flatten: false
             }),
 
-            {
-                name: 'release-module-json-modifier',
-                writeBundle: async function (outputOptions, bundle) {
-                    if (!isRelease) return;
+            // Custom markdown parser from the System repo
+            markdownParser({
+                targets: [
+                    { src: 'src/release-notes.md', dest: 'build/' },
+                    { src: 'src/patch-notes.md', dest: 'build/' },
+                ],
+            })
 
-                    // Path to the output module.json
-                    const moduleJsonPath = path.join(outputOptions.dir, 'module.json');
-
-                    try {
-                        // Read the current module.json
-                        const moduleJson = JSON.parse(await fs.promises.readFile(moduleJsonPath, 'utf8'));
-
-                        // Set the 'protected' property to true for release builds
-                        moduleJson.protected = true;
-
-                        // Write the modified module.json back
-                        await fs.promises.writeFile(
-                            moduleJsonPath,
-                            JSON.stringify(moduleJson, null, 2),
-                            'utf8'
-                        );
-                    } catch (error) {
-                        console.error('Error modifying module.json:', error);
-                    }
-                }
-            }
         ],
         onwarn: (warning, warn) => {
             if (warning.code === 'UNKNOWN_OPTION') {
@@ -75,6 +61,45 @@ export default CLIArgs => {
 
             // Log other warnings
             warn(warning);
+        }
+    }
+}
+
+function markdownParser(config) {
+    return {
+        name: 'markdown-parser',
+        buildEnd() {
+            // Read all markdown files from the config targets
+            const markdownFiles = config.targets
+                .filter((target) => target.src.endsWith('.md'))
+                .filter((target) => fs.existsSync(target.src))
+                .map((target) => {
+                    return fs.readFileSync(target.src, 'utf8');
+                });
+
+            // Parse the markdown files
+            const parsedMarkdown = markdownFiles.map((file) => {
+                return marked(file);
+            });
+
+            // Write the parsed markdown to the output directory
+            parsedMarkdown.forEach((markdown, index) => {
+                // Get source path (except the top most directory)
+                const srcPath = path.dirname(config.targets[index].src).split(path.sep).slice(1).join(path.sep);
+
+                // Get file name without extension from the source path
+                const fileName = path.basename(config.targets[index].src, path.extname(config.targets[index].src));
+
+                // Construct the destination path
+                const dest = path.join(srcPath, config.targets[index].dest, `${fileName}.html`);
+                const destDir = path.join(srcPath, config.targets[index].dest);
+                if(!fs.existsSync(destDir)){
+                    fs.mkdirSync(destDir);
+                }
+
+                // Write the parsed markdown to the destination path
+                fs.writeFileSync(dest, `<div>${markdown}</div>`);
+            });
         }
     }
 }

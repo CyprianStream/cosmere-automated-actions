@@ -1,0 +1,25 @@
+<app-actor-resource>
+<div class="resource {{resource.id}}" data-id="{{resource.id}}">
+    <div class="sidebar-header">
+        <span class="label">{{localize resource.label}}</span>
+    </div>
+    <div class="sheet-stack bar">
+        <div class="container">
+            <div class="background"></div>
+            <div class="inner">
+                <div class="inner-bar" style="width: {{perc resource.value resource.max}};"></div>
+            </div>
+            <div class="border"></div>
+            <div class="value">
+                <span class="current">{{resource.value}}</span>
+                <span class="delim">/</span>
+                <span class="max">{{resource.max}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="btn-group flexrow">
+        <button class="decrease {{#if (eq gained 0)}}disabled{{/if}}" data-action="decreaseGain">-</button>
+        <button class="increase {{#if increaseDisabled}}disabled{{/if}}" data-action="increaseGain">+</button>
+    </div>
+</div>
+</app-actor-resource>
