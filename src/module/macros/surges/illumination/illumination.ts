@@ -68,7 +68,7 @@ export async function cancelComplexIllusion(item: CosmereItem, actor: CosmereAct
     item.delete();
 }
 export async function cancelDisguise(item: CosmereItem, actor: CosmereActor){
-    deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
+    await deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
     item.delete();
 }
 //#endregion

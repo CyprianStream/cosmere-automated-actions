@@ -58,7 +58,7 @@ export async function abrasion(item: CosmereItem, actor: CosmereActor){
 
 export async function cancelSelfAbrasion(item: CosmereItem, actor: CosmereActor){
     //finds items from target and caster and deletes it
-    deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
+    await deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
     item.delete();
 }
 //#endregion

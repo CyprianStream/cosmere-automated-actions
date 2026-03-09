@@ -128,7 +128,7 @@ export async function gravitation(item: CosmereItem, actor: CosmereActor){
 
 export async function cancelGravitationInfusion(cancelItem: CosmereItem, actor: CosmereActor){
     //finds items from target and caster and deletes it
-    deleteDescendantUuids(cancelItem.getFlag(MODULE_ID, "descendantUuids"));
+    await deleteDescendantUuids(cancelItem.getFlag(MODULE_ID, "descendantUuids"));
     cancelItem.delete();
 }
 //#endregion
