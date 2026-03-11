@@ -23,7 +23,7 @@ fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, undefined, "    ")
 let packageLockJson = JSON.parse(fs.readFileSync(packageLockJsonPath, "utf8"));
 packageLockJson.version = version;
 packageLockJson.packages[""].version = version;
-fs.writeFileSync(packageLockJsonPath, JSON.stringify(packageLockJson, undefined, "\t"));
+fs.writeFileSync(packageLockJsonPath, JSON.stringify(packageLockJson, undefined, "    "));
 
 let moduleJson = JSON.parse(fs.readFileSync(moduleJsonPath, "utf8"));
 moduleJson.version = version;

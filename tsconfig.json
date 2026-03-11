@@ -3,7 +3,8 @@
 		"types": [
 			"@league-of-foundry-developers/foundry-vtt-types",
 			"@types/jquery",
-			"node"
+			"node",
+			"@ethaks/fvtt-quench"
 		],
 		"target": "esnext",
 		"module": "esnext",
