@@ -1,5 +1,5 @@
 import { CosmereItem, CosmereActor } from "@system/documents";
-import { log, giveActorItem, giveActorEffect, deleteDescendantUuids } from "@module/utils/helpers";
+import { log, giveActorItem, giveActorEffect, deleteItemAndDescendants } from "@module/utils/helpers";
 import { MODULE_ID } from "@module/constants";
 
 //#region Effect Create Data
@@ -64,12 +64,10 @@ export async function illumination(item: CosmereItem, actor: CosmereActor){
 }
 
 export async function cancelComplexIllusion(item: CosmereItem, actor: CosmereActor){
-    deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
-    item.delete();
+    await deleteItemAndDescendants(item);
 }
 export async function cancelDisguise(item: CosmereItem, actor: CosmereActor){
-    await deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
-    item.delete();
+    await deleteItemAndDescendants(item);
 }
 //#endregion
 

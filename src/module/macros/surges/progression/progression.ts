@@ -1,5 +1,5 @@
 import { CosmereActiveEffect, CosmereActor, CosmereItem, MESSAGE_TYPES } from "@system/documents";
-import { deleteDescendantUuids, getFirstTarget, giveActorEffect, giveActorItem, log } from "../../../utils/helpers";
+import { deleteItemAndDescendants, getFirstTarget, giveActorEffect, giveActorItem, log } from "../../../utils/helpers";
 import { MODULE_ID, SYSTEM_ID } from "@src/module/constants";
 import { expendEffectInvestiture, getSurgeTalents, sizes, getInfusionInvestiture, useCanceled, getAbilityDescription } from "../helpers/surge-helpers";
 import { PRG } from "./talent-ids";
@@ -28,9 +28,7 @@ export async function progression(item: CosmereItem, actor: CosmereActor){
 };
 
 export async function cancelCharacterRegrowth(item: CosmereItem, actor: CosmereActor){
-    //finds items from target and caster and deletes it
-    await deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
-    item.delete();
+    await deleteItemAndDescendants(item);
 }
 //#endregion
 

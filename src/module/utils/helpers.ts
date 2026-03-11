@@ -45,11 +45,16 @@ declare interface giveActorItemGMData {
     itemUUID: string
 }
 
-export async function deleteDescendantUuids(descendantUuids: string[]){
+export async function deleteItemAndDescendants(item: CosmereItem){
+    await deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
+    await item.delete();
+}
+
+async function deleteDescendantUuids(descendantUuids: string[]){
     for(const uuid of descendantUuids){
         const documentToDelete = await fromUuid(uuid) as CosmereDocument;
         if(documentToDelete.canUserModify(game.user!, "delete")){
-            documentToDelete.delete();
+            await documentToDelete.delete();
         }
         else{
             await game.users?.activeGM?.query(MODULE_QUERY.deleteUuidGM, uuid);
