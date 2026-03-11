@@ -19,7 +19,7 @@
     ],
     "url": "https://github.com/CyprianStream/cosmere-automated-actions/",
     "manifest": "https://raw.githubusercontent.com/CyprianStream/cosmere-automated-actions/refs/heads/master/src/module.json",
-    "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/release-1.3.0/cosmere-automated-actions-release-1.3.0.zip",
+    "download": "https://github.com/CyprianStream/cosmere-automated-actions/releases/download/release-1.3.1/cosmere-automated-actions-release-1.3.1.zip",
     "compatibility": {
         "minimum": "13",
         "verified": "13",
