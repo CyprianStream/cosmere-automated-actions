@@ -27,11 +27,27 @@ export function getModuleSetting<
 	return game.settings!.get(MODULE_ID, settingKey) as T;
 }
 
-export function setModuleSetting<
+export async function setModuleSetting<
     TKey extends ModuleSettingsKey,
     TValue extends ModuleSettingsConfig[`${typeof MODULE_ID}.${TKey}`],
 >(settingKey: TKey, value: TValue){
-	return game.settings!.set(MODULE_ID, settingKey, value as any);
+	return (await game.settings!.set(MODULE_ID, settingKey, value as any));
+}
+
+export function getAllModuleSettings() {
+    let moduleSettings = {};
+    for(const keyName in SETTINGS){
+        let key = foundry.utils.getProperty(SETTINGS, keyName) as ModuleSettingsKey;
+        foundry.utils.setProperty(moduleSettings, key, getModuleSetting(key));
+    }
+    return moduleSettings;
+}
+
+export async function setAllModuleSettings(moduleSettings: any) {
+    for(const keyName in SETTINGS){
+        let key = foundry.utils.getProperty(SETTINGS, keyName) as ModuleSettingsKey;
+        await setModuleSetting(key, foundry.utils.getProperty(moduleSettings, key) as string | boolean);
+    }
 }
 
 export function registerModuleSettings(){
