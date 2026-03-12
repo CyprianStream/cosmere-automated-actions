@@ -24,10 +24,12 @@ export function registerInternalTestBatch(quench: Quench){
                     {
                         actorType: ActorType.Character,
                         turnSpeed: TurnSpeed.Fast,
+                        name: "Caster",
                     },
                     {
                         actorType: ActorType.Character,
                         turnSpeed: TurnSpeed.Slow,
+                        name: "Target",
                     },
                     {
                         actorType: ActorType.Adversary,
@@ -46,7 +48,13 @@ export function registerInternalTestBatch(quench: Quench){
                     testCombat = await createTestCombat(testCombatantOptions);
                 });
 
-                it("")
+                describe("Self-infusion", async function() {
+
+                });
+
+                describe("Other-infusion", async function() {
+
+                });
 
                 afterEach(async function() {
                     await teardownTestCombat(testCombat);
@@ -60,6 +68,7 @@ export function registerInternalTestBatch(quench: Quench){
                     {
                         actorType: ActorType.Character,
                         turnSpeed: TurnSpeed.Fast,
+                        name: "Caster",
                     },
                     {
                         actorType: ActorType.Character,
