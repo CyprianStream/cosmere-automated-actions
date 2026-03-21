@@ -19,12 +19,9 @@ export function nameToId(str: string) {
 }
 
 export function registerQueries(){
-    let newQueries = {
-        [MODULE_QUERY.giveActorEffectGM]: giveActorEffectGM,
-        [MODULE_QUERY.giveActorItemGM]: giveActorItemGM,
-        [MODULE_QUERY.deleteUuidGM]: deleteUuidGM,
-    }
-    foundry.utils.mergeObject(CONFIG.queries, newQueries);
+    CONFIG.queries[MODULE_QUERY.giveActorEffectGM] = giveActorEffectGM;
+    CONFIG.queries[MODULE_QUERY.giveActorItemGM] = giveActorItemGM;
+    CONFIG.queries[MODULE_QUERY.deleteUuidGM] = deleteUuidGM;
 }
 
 //Actor Functions
