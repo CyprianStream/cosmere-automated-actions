@@ -1,5 +1,5 @@
 import { CosmereItem, CosmereActor, CosmereActiveEffect } from "@system/documents";
-import { deleteDescendantUuids, getFirstTarget, giveActorEffect, giveActorItem, log } from "@module/utils/helpers";
+import { deleteItemAndDescendants, getFirstTarget, giveActorEffect, giveActorItem, log } from "@module/utils/helpers";
 import { GRV } from "./talent-ids";
 import { getSurgeTalents, expendEffectInvestiture, useCanceled, getInfusionInvestiture } from "../helpers/surge-helpers";
 import { MODULE_ID } from "@src/module/constants";
@@ -128,8 +128,7 @@ export async function gravitation(item: CosmereItem, actor: CosmereActor){
 
 export async function cancelGravitationInfusion(cancelItem: CosmereItem, actor: CosmereActor){
     //finds items from target and caster and deletes it
-    deleteDescendantUuids(cancelItem.getFlag(MODULE_ID, "descendantUuids"));
-    cancelItem.delete();
+    await deleteItemAndDescendants(cancelItem);
 }
 //#endregion
 

@@ -1,5 +1,5 @@
 import { MODULE_ID, MODULE_NAME } from "@src/module/constants";
-import { deleteDescendantUuids, giveActorItem } from "@src/module/utils/helpers";
+import { deleteItemAndDescendants, giveActorItem } from "@src/module/utils/helpers";
 import { CosmereItem, CosmereActor, CosmereActiveEffect } from "@src/declarations/cosmere-rpg/documents";
 import { getInfusionInvestiture, getSurgeTalents, useCanceled } from "../helpers/surge-helpers";
 import { ABR } from "./talent-ids";
@@ -58,8 +58,7 @@ export async function abrasion(item: CosmereItem, actor: CosmereActor){
 
 export async function cancelSelfAbrasion(item: CosmereItem, actor: CosmereActor){
     //finds items from target and caster and deletes it
-    deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
-    item.delete();
+    await deleteItemAndDescendants(item);
 }
 //#endregion
 

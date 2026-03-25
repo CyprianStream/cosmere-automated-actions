@@ -1,5 +1,5 @@
 import { CosmereItem, CosmereActor, CosmereActiveEffect } from "@system/documents";
-import { deleteDescendantUuids, getFirstTarget, giveActorEffect, giveActorItem, log } from "@module/utils/helpers";
+import { getFirstTarget, giveActorEffect, giveActorItem, log } from "@module/utils/helpers";
 import { DVS } from "./talent-ids";
 import { getSurgeTalents, expendEffectInvestiture, useCanceled, getInfusionInvestiture } from "../helpers/surge-helpers";
 import { MODULE_ID, SYSTEM_ID } from "@module/constants";

@@ -19,12 +19,9 @@ export function nameToId(str: string) {
 }
 
 export function registerQueries(){
-    let newQueries = {
-        [MODULE_QUERY.giveActorEffectGM]: giveActorEffectGM,
-        [MODULE_QUERY.giveActorItemGM]: giveActorItemGM,
-        [MODULE_QUERY.deleteUuidGM]: deleteUuidGM,
-    }
-    foundry.utils.mergeObject(CONFIG.queries, newQueries);
+    CONFIG.queries[MODULE_QUERY.giveActorEffectGM] = giveActorEffectGM;
+    CONFIG.queries[MODULE_QUERY.giveActorItemGM] = giveActorItemGM;
+    CONFIG.queries[MODULE_QUERY.deleteUuidGM] = deleteUuidGM;
 }
 
 //Actor Functions
@@ -45,11 +42,16 @@ declare interface giveActorItemGMData {
     itemUUID: string
 }
 
-export async function deleteDescendantUuids(descendantUuids: string[]){
+export async function deleteItemAndDescendants(item: CosmereItem){
+    await deleteDescendantUuids(item.getFlag(MODULE_ID, "descendantUuids"));
+    await item.delete();
+}
+
+async function deleteDescendantUuids(descendantUuids: string[]){
     for(const uuid of descendantUuids){
         const documentToDelete = await fromUuid(uuid) as CosmereDocument;
         if(documentToDelete.canUserModify(game.user!, "delete")){
-            documentToDelete.delete();
+            await documentToDelete.delete();
         }
         else{
             await game.users?.activeGM?.query(MODULE_QUERY.deleteUuidGM, uuid);
